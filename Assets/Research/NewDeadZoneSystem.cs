@@ -45,7 +45,7 @@ public class NewDeadZoneSystem : MonoBehaviour
                 _deadZone.SetActive(false);
             }
             else {
-                player.
+                //player.
             }
             _isCollidingWithPlayer = true;
             _targetPlayer = player;
