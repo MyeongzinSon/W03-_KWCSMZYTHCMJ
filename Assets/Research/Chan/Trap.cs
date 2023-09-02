@@ -44,7 +44,8 @@ namespace Research.Chan
             _visualIsTemporal.SetActive(false);
             if (isTemporal)
             {
-                StopCoroutine(_coroutineTemporalTrap);
+                if (_coroutineTemporalTrap != null && _coroutineTemporalTrap.MoveNext())
+                    StopCoroutine(_coroutineTemporalTrap);
                 _coroutineTemporalTrap = CoroutineTemporalTrap(2f);
                 StartCoroutine(_coroutineTemporalTrap);
             }
