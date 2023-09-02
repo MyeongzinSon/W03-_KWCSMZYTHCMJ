@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public struct InputInfo
 {
@@ -24,32 +25,33 @@ public struct InputInfo
 
 public class InputRecorder : MonoBehaviour
 {
-    Queue<InputInfo> inputQueue = new();
+    Queue<InputInfo> inputQueue;
     float recordStartTime = 0;
-    bool isRecording = false;
+    public bool IsRecording { get; private set; }
 
     InputInfo currentInputInfo = InputInfo.zero;
 
     void Initialize()
     {
+        IsRecording = false;
         recordStartTime = Time.time;
-        inputQueue.Clear();
+        inputQueue = new();
         currentInputInfo = InputInfo.zero;
     }
 
     public void StartRecord()
     {
-        if (isRecording) { return; }
+        if (IsRecording) { return; }
 
         Initialize();
-        isRecording = true;
+        IsRecording = true;
         Debug.Log($"Start Recording! : {Time.time}");
     }
     public void EndRecord()
     {
-        if (!isRecording) { return; }
+        if (!IsRecording) { return; }
 
-        isRecording = false;
+        IsRecording = false;
 
         Debug.Log($"End Recording! : {Time.time}");
         Debug.Log($"Queue Count = {inputQueue.Count}");
