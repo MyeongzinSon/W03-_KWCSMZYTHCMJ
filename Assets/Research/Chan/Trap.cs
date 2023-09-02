@@ -51,9 +51,14 @@ namespace Research.Chan
             }
         }
 
-        public void SetTrap(int curStageNumber)
+        public void SetTrapStageNumber(int stageNumber)
         {
-            if (stageNumber < curStageNumber)
+            this.stageNumber = stageNumber;
+        }
+        
+        public void SetupTrap(int currentStageNumber)
+        {
+            if (stageNumber < currentStageNumber)
             {
                 isInvulnerable = false;
             }
