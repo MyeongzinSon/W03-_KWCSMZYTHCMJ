@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - DeadZone
+  - Ghost
   layers:
   - Default
   - TransparentFX
