@@ -45,7 +45,7 @@ public class NewDeadZoneSystem : MonoBehaviour
                 _deadZone.SetActive(false);
             }
             else {
-                //player.
+                player.DeadZoneCollision();
             }
             _isCollidingWithPlayer = true;
             _targetPlayer = player;
@@ -54,7 +54,12 @@ public class NewDeadZoneSystem : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Player")) {
+            if (_isAuto) {
+                _playerDetect.SetActive(true);
+                _deadZone.SetActive(true);
+            }
             _isCollidingWithPlayer = false;
+            _targetPlayer = null;
         }
     }
     
