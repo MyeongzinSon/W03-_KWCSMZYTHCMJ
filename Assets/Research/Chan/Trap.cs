@@ -17,6 +17,8 @@ namespace Research.Chan
         
         private SpriteRenderer _spriteRenderer;
         
+        private IEnumerator _coroutineTemporalTrap;
+        
         /*public Trap(int stageNumber, bool isInvulnerable, bool isTemporal)
         {
             this.stageNumber = stageNumber;
@@ -36,6 +38,18 @@ namespace Research.Chan
             _spriteRenderer.color = new Color((trapNumber % 10) * 0.2f, .2f, .2f, 1f);
         }
 
+        public void DisableTrap()
+        {
+            _deadZone.SetActive(false);
+            _visualIsTemporal.SetActive(false);
+            if (isTemporal)
+            {
+                StopCoroutine(_coroutineTemporalTrap);
+                _coroutineTemporalTrap = CoroutineTemporalTrap(2f);
+                StartCoroutine(_coroutineTemporalTrap);
+            }
+        }
+
         public void SetTrap(int curStageNumber)
         {
             if (stageNumber < curStageNumber)
@@ -46,13 +60,11 @@ namespace Research.Chan
             if (isInvulnerable)
             {
                 //플레이어 감지 활성화
-                _deadZone.SetActive(false);
                 _playerDetect.SetActive(true);
             }
             else
             {
                 //플레이어 감지 비활성화
-                _deadZone.SetActive(true);
                 _playerDetect.SetActive(false);
             }
         }
@@ -84,6 +96,13 @@ namespace Research.Chan
                     }
                 }
             }
+        }
+
+        private IEnumerator CoroutineTemporalTrap(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            _deadZone.SetActive(true);
+            _visualIsTemporal.SetActive(true);
         }
     }
 }
