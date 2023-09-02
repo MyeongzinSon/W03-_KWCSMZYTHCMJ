@@ -5,9 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
 {
-    [SerializeField] InputRecorder recorder;
-    [SerializeField] InputDecoder decoder;
-    [SerializeField] GhostCharacter decodeTarget;
+    InputRecorder recorder;
 
     private void Awake()
     {
@@ -15,6 +13,7 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
         inputs.Player.SetCallbacks(this);
         inputs.Enable();
 
+        recorder = GetComponent<InputRecorder>();
     }
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -42,14 +41,6 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
     {
         transform.Translate(3f * inputDirection * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartRecord();
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            EndRecordAndStartDecode();
-        }
     }
 
     void StartRecord()
@@ -62,9 +53,6 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
         recorder.EndRecord();
 
         recorder.TryGetInputQueue(out var recordedQueue);
-
-        decoder.DecodeInputQueue(recordedQueue);
-        decoder.StartDecode(decodeTarget);
     }
 
     void Interact()

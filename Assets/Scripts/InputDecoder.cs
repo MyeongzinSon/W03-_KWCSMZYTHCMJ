@@ -54,7 +54,8 @@ public class InputDecoder : MonoBehaviour
 
     public void DecodeInputQueue(Queue<InputInfo> inputQueue)
     {
-        this.inputQueue = inputQueue;
+        // deep copy of inputQueue;
+        this.inputQueue = new Queue<InputInfo>(inputQueue);
     }
     public void StartDecode(IDecodeListener decodeListener)
     {

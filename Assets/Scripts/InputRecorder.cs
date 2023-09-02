@@ -55,10 +55,6 @@ public class InputRecorder : MonoBehaviour
 
         Debug.Log($"End Recording! : {Time.time}");
         Debug.Log($"Queue Count = {inputQueue.Count}");
-        foreach (var input in inputQueue)
-        {
-            Debug.Log($"InputInfo = {input}");
-        }
     }
 
     public void RecordCurrentInput(bool isInteractingThisFrame)
