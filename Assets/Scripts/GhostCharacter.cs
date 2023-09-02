@@ -14,16 +14,6 @@ public class GhostCharacter : CharacterBase, IDecodeListener
         }
     }
 
-    private void Awake()
-    {
-
-    }
-
-    void Update()
-    {
-        transform.Translate(3f * inputDirection * Time.deltaTime);
-    }
-
     void Interact()
     {
         Debug.Log($"Interaction has been called!");
