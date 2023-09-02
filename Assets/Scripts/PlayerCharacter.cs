@@ -7,8 +7,10 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
 {
     InputRecorder recorder;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         PlayerInputActions inputs = new();
         inputs.Player.SetCallbacks(this);
         inputs.Enable();
@@ -35,24 +37,6 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
         {
             recorder.RecordCurrentInput(inputDirection);
         }
-    }
-
-    void Update()
-    {
-        transform.Translate(3f * inputDirection * Time.deltaTime);
-
-    }
-
-    void StartRecord()
-    {
-        recorder.StartRecord();
-    }
-
-    void EndRecordAndStartDecode()
-    {
-        recorder.EndRecord();
-
-        recorder.TryGetInputQueue(out var recordedQueue);
     }
 
     void Interact()

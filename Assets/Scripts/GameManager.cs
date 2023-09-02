@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             StageFail();
@@ -75,7 +74,6 @@ public class GameManager : MonoBehaviour
                 decoder.StartDecode(decodeTarget);
             }
         }
-        Debug.Log($"StartStage({currentLevel}) ended.");
     }
 
     public void StageClear()
