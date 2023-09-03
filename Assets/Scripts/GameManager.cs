@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
 
     int currentLevel = 1;
+    int clearedCount = 0;
 
     private void Awake()
     {
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
-            StageClear();
+            LevelClear();
         }
     }
 
@@ -76,23 +77,40 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StageClear()
+    public void LevelClear()
     {
         currentInputRecorder.EndRecord();
         currentInputRecorder.TryGetInputQueue(out var recordedQueue);
         inputQueues[currentLevel - 1] = recordedQueue;
         currentLevel++;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        clearedCount = 0;
+
     }
     public void StageFail()
     {
         currentInputRecorder.EndRecord();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        clearedCount = 0;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         StartStage();
+    }
+
+    public void OneOfStagesCleared()
+    {
+        clearedCount++;
+        if (clearedCount >= currentLevel)
+        {
+            if (currentLevel == k_maxLevel) Debug.Log("Level Cleared!");
+            else LevelClear();
+
+
+        }
     }
 
 }
