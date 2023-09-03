@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Research.Chan;
@@ -6,25 +7,43 @@ using UnityEngine;
 
 public class Switch : MonoBehaviour
 {
-    [SerializeField] private Trap _trap;
+    [SerializeField] private List<TrapData> _traps = new List<TrapData>();
 
     void Awake() {
-        Init(_trap);
+        Init(_traps);
     }
 
-    public void Init(Trap targetTrap) {
-        _trap = targetTrap;
+    private void Init(List<TrapData> targetTraps) {
+        _traps = targetTraps;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            _trap.PlayerToggleOnTrap();
+            foreach (var trap in _traps) {
+                if (trap.shouldTurnOn) {
+                    trap.trap.PlayerToggleOnTrap();
+                } else {
+                    trap.trap.PlayerToggleOffTrap();
+                }
+            }
         }
     }
 
     void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            _trap.PlayerToggleOffTrap();
+            foreach (var trap in _traps) {
+                if (trap.shouldTurnOn) {
+                    trap.trap.PlayerToggleOffTrap();
+                } else {
+                    trap.trap.PlayerToggleOnTrap();
+                }
+            }
         }
+    }
+
+    [Serializable]
+    class TrapData {
+        public Trap trap;
+        public bool shouldTurnOn = true;
     }
 }
