@@ -21,6 +21,7 @@ public abstract class CharacterBase : MonoBehaviour
     protected virtual void Update()
     {
         if(!isDoneMoving ) Move();
+        else rigidBody.velocity = Vector2.zero;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
@@ -28,7 +29,7 @@ public abstract class CharacterBase : MonoBehaviour
         if (other.tag == "EndingPoint")
         {
             Debug.Log("end");
-            isDoneMoving = false;
+            isDoneMoving = true;
             GameManager.Instance.OneOfStagesCleared();
         }
     }
@@ -39,5 +40,14 @@ public abstract class CharacterBase : MonoBehaviour
         velocity.x = Mathf.Abs(velocity.x) > k_inputCriterionSin ? Mathf.Sign(velocity.x) : 0;
         velocity.y = Mathf.Abs(velocity.y) > k_inputCriterionSin ? Mathf.Sign(velocity.y) : 0;
         rigidBody.velocity = velocity.normalized * speed;
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("DeadZone"))
+        {
+            //Debug.Log("trap");
+            GameManager.Instance.StageFail();
+        }
     }
 }

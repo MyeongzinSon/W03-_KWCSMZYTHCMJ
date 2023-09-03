@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Research.Chan;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -61,8 +62,15 @@ public class GameManager : MonoBehaviour
 
     public void StartStage()
     {
-        traps = Resources.FindObjectsOfTypeAll<Trap>().ToList();
-        traps.ForEach(t => t.Init(1, currentStage));
+        traps = new List<Trap>();
+        for (int ti = 0; ti < k_maxStage; ti++) {
+            var l = GameObject.Find("Stage " + (ti + 1));
+            List<Trap> tl = l.GetComponentsInChildren<Trap>().ToList();
+            if (tl.Count == 0) continue;
+            tl.ForEach(t => t.Init(ti + 1, currentStage));
+            traps.AddRange(tl);
+        }
+        
         playerAndGhosts.Clear();
 
         int i = 1;

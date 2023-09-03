@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -43,5 +44,4 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
     {
         Debug.Log($"Interaction has been called!");
     }
-
 }

@@ -45,7 +45,7 @@ namespace Research.Chan
             _visualIsTemporal.gameObject.SetActive(isTemporal);
             
             _spriteRenderer = transform.Find("DeadZone").GetComponent<SpriteRenderer>();
-            _spriteRenderer.color = new Color((trapNumber % 10) * 0.2f, .2f, .2f, 1f);
+            //_spriteRenderer.color = new Color((trapNumber % 10) * 0.2f, .2f, .2f, 1f);
 
             stageNumber = trapStageNum;
 
