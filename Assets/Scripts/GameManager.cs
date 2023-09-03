@@ -1,24 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    const int k_maxLevel = 4;
+    const int k_maxStage = 4;
 
     static GameManager _instance;
     public static GameManager Instance => _instance;
 
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject ghostPrefab;
-    [SerializeField] Transform[] startingPoints = new Transform[k_maxLevel];
+    [SerializeField] Transform[] startingPoints = new Transform[k_maxStage];
 
+    List<GameObject> playerAndGhosts = new();
     InputRecorder currentInputRecorder;
-    Queue<InputInfo>[] inputQueues = new Queue<InputInfo>[k_maxLevel - 1];
+    Queue<InputInfo>[] inputQueues = new Queue<InputInfo>[k_maxStage - 1];
 
 
-    int currentLevel = 1;
+    int currentStage = 1;
     int clearedCount = 0;
 
     private void Awake()
@@ -57,10 +59,13 @@ public class GameManager : MonoBehaviour
 
     public void StartStage()
     {
-        for (int i = 1; i <= currentLevel; i++)
+        playerAndGhosts.Clear();
+
+        int i = 1;
+        for (; i <= currentStage; i++)
         {
             var startingPoint = startingPoints[i - 1].position;
-            if (i == currentLevel)
+            if (i == currentStage)
             {
                 var playerGameObject = Instantiate(playerPrefab, startingPoint, Quaternion.identity);
                 currentInputRecorder = playerGameObject.GetComponent<InputRecorder>();
@@ -75,14 +80,18 @@ public class GameManager : MonoBehaviour
                 decoder.StartDecode(decodeTarget);
             }
         }
+        for(; i <= k_maxStage; i++)
+        {
+
+        }
     }
 
     public void LevelClear()
     {
         currentInputRecorder.EndRecord();
         currentInputRecorder.TryGetInputQueue(out var recordedQueue);
-        inputQueues[currentLevel - 1] = recordedQueue;
-        currentLevel++;
+        inputQueues[currentStage - 1] = recordedQueue;
+        currentStage++;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         clearedCount = 0;
@@ -104,12 +113,10 @@ public class GameManager : MonoBehaviour
     public void OneOfStagesCleared()
     {
         clearedCount++;
-        if (clearedCount >= currentLevel)
+        if (clearedCount >= currentStage)
         {
-            if (currentLevel == k_maxLevel) Debug.Log("Level Cleared!");
+            if (currentStage == k_maxStage) Debug.Log("Level Cleared!");
             else LevelClear();
-
-
         }
     }
 
