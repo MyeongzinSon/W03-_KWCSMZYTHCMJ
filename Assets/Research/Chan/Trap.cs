@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Research.Chan
 {
@@ -17,6 +18,7 @@ namespace Research.Chan
         
         private SpriteRenderer _spriteRenderer;
         
+        public float trapDisableDuration = 3f;
         private IEnumerator _coroutineTemporalTrap;
         
         /*public Trap(int stageNumber, bool isInvulnerable, bool isTemporal)
@@ -44,9 +46,11 @@ namespace Research.Chan
             _visualIsTemporal.SetActive(false);
             if (isTemporal)
             {
-                if (_coroutineTemporalTrap != null && _coroutineTemporalTrap.MoveNext())
+                if (_coroutineTemporalTrap != null)// && _coroutineTemporalTrap.MoveNext())
+                {
                     StopCoroutine(_coroutineTemporalTrap);
-                _coroutineTemporalTrap = CoroutineTemporalTrap(2f);
+                }
+                _coroutineTemporalTrap = CoroutineTemporalTrap(trapDisableDuration);
                 StartCoroutine(_coroutineTemporalTrap);
             }
         }
