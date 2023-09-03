@@ -7,6 +7,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2643430951649552192, guid: e1cd8e9d45dfdf64fad47290a5c0e575, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+    - target: {fileID: 2643430951649552192, guid: e1cd8e9d45dfdf64fad47290a5c0e575, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643430951649552192, guid: e1cd8e9d45dfdf64fad47290a5c0e575, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643430951649552192, guid: e1cd8e9d45dfdf64fad47290a5c0e575, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643430951649552192, guid: e1cd8e9d45dfdf64fad47290a5c0e575, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2643430951649552195, guid: e1cd8e9d45dfdf64fad47290a5c0e575, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -55,6 +75,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3794985731670134340, guid: e1cd8e9d45dfdf64fad47290a5c0e575, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1cd8e9d45dfdf64fad47290a5c0e575, type: 3}
 --- !u!1 &4082722458154384422 stripped
@@ -62,7 +86,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2643430951649552206, guid: e1cd8e9d45dfdf64fad47290a5c0e575, type: 3}
   m_PrefabInstance: {fileID: 2019833647214173032}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-8747556057540520809
+--- !u!114 &1721276100117493810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
---- !u!114 &1528238879872778453
+--- !u!114 &5261414906994979738
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
