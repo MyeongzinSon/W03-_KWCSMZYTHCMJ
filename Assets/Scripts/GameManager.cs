@@ -36,11 +36,11 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            StageFail();
+            LevelFail();
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
-            StageClear();
+            LevelClear();
         }
     }
 
@@ -48,13 +48,13 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        StartStage();
+        StartLevel();
     }
     private void Initialize()
     {
     }
 
-    public void StartStage()
+    public void StartLevel()
     {
         for (int i = 1; i <= currentLevel; i++)
         {
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StageClear()
+    public void LevelClear()
     {
         currentInputRecorder.EndRecord();
         currentInputRecorder.TryGetInputQueue(out var recordedQueue);
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         currentLevel++;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    public void StageFail()
+    public void LevelFail()
     {
         currentInputRecorder.EndRecord();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        StartStage();
+        StartLevel();
     }
 
 }
