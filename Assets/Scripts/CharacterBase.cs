@@ -44,9 +44,8 @@ public abstract class CharacterBase : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("DeadZone"))
+        if (other.gameObject.GetComponent<Deadly>() != null)
         {
-            //Debug.Log("trap");
             GameManager.Instance.StageFail();
         }
     }

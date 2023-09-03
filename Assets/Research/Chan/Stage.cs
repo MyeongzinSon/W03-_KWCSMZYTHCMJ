@@ -5,6 +5,6 @@ namespace Research.Chan
 {
     public class Stage : MonoBehaviour
     {
-        public List<Trap> traps;
+        public List<SwitchableTrap> traps;
     }
 }

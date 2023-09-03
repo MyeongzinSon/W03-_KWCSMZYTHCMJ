@@ -43,7 +43,7 @@ public class Switch : MonoBehaviour
 
     [Serializable]
     class TrapData {
-        public Trap trap;
+        public SwitchableTrap trap;
         public bool shouldTurnOn = true;
     }
 }

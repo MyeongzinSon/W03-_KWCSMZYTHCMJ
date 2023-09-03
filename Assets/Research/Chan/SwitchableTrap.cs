@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Research.Chan
 {
-    public class Trap : MonoBehaviour
+    public class SwitchableTrap : Deadly
     {
         [SerializeField] protected int stageNumber;
         [SerializeField] protected int trapNumber;
