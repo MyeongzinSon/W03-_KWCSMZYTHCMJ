@@ -11,6 +11,7 @@ public abstract class CharacterBase : MonoBehaviour
     protected Rigidbody2D rigidBody;
 
     protected Vector2 inputDirection;
+    protected bool isDoneMoving; //this character has reached its ending point.
 
     protected virtual void Awake()
     {
@@ -19,17 +20,24 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        var velocity = inputDirection;
-        velocity.x = Mathf.Abs(velocity.x) > k_inputCriterionSin ? Mathf.Sign(velocity.x) : 0;
-        velocity.y = Mathf.Abs(velocity.y) > k_inputCriterionSin ? Mathf.Sign(velocity.y) : 0;
-        rigidBody.velocity = velocity.normalized * speed;
+        if(!isDoneMoving ) Move();
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "EndingPoint")
         {
+            Debug.Log("end");
+            isDoneMoving = false;
             GameManager.Instance.OneOfStagesCleared();
         }
+    }
+
+    private void Move()
+    {
+        var velocity = inputDirection;
+        velocity.x = Mathf.Abs(velocity.x) > k_inputCriterionSin ? Mathf.Sign(velocity.x) : 0;
+        velocity.y = Mathf.Abs(velocity.y) > k_inputCriterionSin ? Mathf.Sign(velocity.y) : 0;
+        rigidBody.velocity = velocity.normalized * speed;
     }
 }
