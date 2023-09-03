@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 
 namespace Research.Chan
@@ -18,6 +19,8 @@ namespace Research.Chan
         private SpriteRenderer _spriteRenderer;
         
         private IEnumerator _coroutineTemporalTrap;
+        private bool _isInitialized = false;
+        private bool _isToggledOn = false;
         
         /*public Trap(int stageNumber, bool isInvulnerable, bool isTemporal)
         {
@@ -28,6 +31,13 @@ namespace Research.Chan
 
         private void Awake()
         {
+            Init(1, 2);
+        }
+
+        public void Init(int trapStageNum, int curStageNum) {
+            _isInitialized = true;
+            _isToggledOn = false;
+
             _deadZone = transform.Find("DeadZone").gameObject;
             _playerDetect = transform.Find("PlayerDetect").gameObject;
             _visualIsTemporal = transform.Find("VisualIsTemporal").gameObject;
@@ -36,18 +46,24 @@ namespace Research.Chan
             
             _spriteRenderer = transform.Find("DeadZone").GetComponent<SpriteRenderer>();
             _spriteRenderer.color = new Color((trapNumber % 10) * 0.2f, .2f, .2f, 1f);
+
+            stageNumber = trapStageNum;
+
+            SetTrap(curStageNum);
         }
 
-        public void DisableTrap()
+        public void PlayerToggleOnTrap()
         {
             _deadZone.SetActive(false);
             _visualIsTemporal.SetActive(false);
-            if (isTemporal)
-            {
-                if (_coroutineTemporalTrap != null && _coroutineTemporalTrap.MoveNext())
-                    StopCoroutine(_coroutineTemporalTrap);
-                _coroutineTemporalTrap = CoroutineTemporalTrap(2f);
-                StartCoroutine(_coroutineTemporalTrap);
+            _isToggledOn = true;
+        }
+
+        public void PlayerToggleOffTrap() {
+            if (isTemporal) {
+                _isToggledOn = false;
+                _deadZone.SetActive(true);
+                _visualIsTemporal.SetActive(true);
             }
         }
 
@@ -56,6 +72,12 @@ namespace Research.Chan
             if (stageNumber < curStageNumber)
             {
                 isInvulnerable = false;
+            } else if (stageNumber == curStageNumber)
+            {
+                isInvulnerable = true;
+            } else {
+                this.gameObject.SetActive(false);
+                return;
             }
             
             if (isInvulnerable)

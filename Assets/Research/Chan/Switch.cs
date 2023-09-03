@@ -18,7 +18,13 @@ public class Switch : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            _trap.DisableTrap();
+            _trap.PlayerToggleOnTrap();
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other) {
+        if (other.CompareTag("Player")) {
+            _trap.PlayerToggleOffTrap();
         }
     }
 }
