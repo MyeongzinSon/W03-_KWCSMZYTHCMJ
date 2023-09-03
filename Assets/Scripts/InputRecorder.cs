@@ -51,25 +51,27 @@ public class InputRecorder : MonoBehaviour
     {
         if (!IsRecording) { return; }
 
+        RecordCurrentInput(Vector2.zero, false);
         IsRecording = false;
 
         Debug.Log($"End Recording! : {Time.time}");
         Debug.Log($"Queue Count = {inputQueue.Count}");
     }
 
-    public void RecordCurrentInput(bool isInteractingThisFrame)
-    {
-        currentInputInfo.time = Time.time - recordStartTime;
-        currentInputInfo.isInteractingThisFrame = isInteractingThisFrame;
-        inputQueue.Enqueue(currentInputInfo);
-    }
-
-    public void RecordCurrentInput(Vector2 currentInput)
+    public void RecordCurrentInput(Vector2 currentInput, bool isInteractingThisFrame)
     {
         currentInputInfo.time = Time.time - recordStartTime;
         currentInputInfo.direction = currentInput;
-        currentInputInfo.isInteractingThisFrame = false;
+        currentInputInfo.isInteractingThisFrame = isInteractingThisFrame;
         inputQueue.Enqueue(currentInputInfo);
+    }
+    public void RecordCurrentInput(bool isInteractingThisFrame)
+    {
+        RecordCurrentInput(currentInputInfo.direction, isInteractingThisFrame);
+    }
+    public void RecordCurrentInput(Vector2 currentInput)
+    {
+        RecordCurrentInput(currentInput, false);
     }
 
     public bool TryGetInputQueue(out Queue<InputInfo> returnedQueue)
