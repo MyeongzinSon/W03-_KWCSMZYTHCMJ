@@ -13,6 +13,7 @@ namespace Research.Chan
         [SerializeField] protected bool isTemporal;
         
         private GameObject _deadZone;
+        [SerializeField]
         private GameObject _playerDetect;
         private GameObject _visualIsTemporal;
         
@@ -31,7 +32,7 @@ namespace Research.Chan
         private void Awake()
         {
             _deadZone = transform.Find("DeadZone").gameObject;
-            _playerDetect = transform.Find("PlayerDetect").gameObject;
+            //_playerDetect = transform.Find("PlayerDetect").gameObject;
             _visualIsTemporal = transform.Find("VisualIsTemporal").gameObject;
 
             _visualIsTemporal.gameObject.SetActive(isTemporal);
@@ -66,17 +67,10 @@ namespace Research.Chan
             {
                 isInvulnerable = false;
             }
-            
-            if (isInvulnerable)
-            {
-                //플레이어 감지 활성화
-                _playerDetect.SetActive(true);
-            }
-            else
-            {
-                //플레이어 감지 비활성화
-                _playerDetect.SetActive(false);
-            }
+
+            //플레이어 감지 활성화
+            _playerDetect.SetActive(isInvulnerable);
+            //플레이어 감지 비활성화
         }
         
         private void OnTriggerEnter2D(Collider2D other)
