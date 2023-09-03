@@ -31,7 +31,7 @@ namespace Research.Chan
 
         private void Awake()
         {
-            Init(1, 2);
+            //Init(1, 2);
         }
 
         public void Init(int trapStageNum, int curStageNum) {

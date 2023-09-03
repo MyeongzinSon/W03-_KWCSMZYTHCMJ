@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Research.Chan;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     List<GameObject> playerAndGhosts = new();
     InputRecorder currentInputRecorder;
     Queue<InputInfo>[] inputQueues = new Queue<InputInfo>[k_maxStage - 1];
+    List<Trap> traps;
 
 
     int currentStage = 1;
@@ -59,6 +61,8 @@ public class GameManager : MonoBehaviour
 
     public void StartStage()
     {
+        traps = Resources.FindObjectsOfTypeAll<Trap>().ToList();
+        traps.ForEach(t => t.Init(1, currentStage));
         playerAndGhosts.Clear();
 
         int i = 1;
