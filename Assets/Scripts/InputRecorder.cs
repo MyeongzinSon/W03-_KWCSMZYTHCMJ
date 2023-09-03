@@ -51,7 +51,6 @@ public class InputRecorder : MonoBehaviour
     {
         if (!IsRecording) { return; }
 
-        RecordCurrentInput(Vector2.zero, false, Time.deltaTime);
         IsRecording = false;
 
         Debug.Log($"End Recording! : {Time.time}");
