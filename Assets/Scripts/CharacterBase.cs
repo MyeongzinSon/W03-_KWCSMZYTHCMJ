@@ -18,6 +18,7 @@ public abstract class CharacterBase : MonoBehaviour
     protected ParticleSystem _winParticleSystem;
 
     protected SpriteRenderer _spriteRenderer;
+    protected Collider2D _collider;
 
     protected bool _isCollidingWithSwitch = false;
     protected Switch _collidingSwitch = null;
@@ -31,6 +32,7 @@ public abstract class CharacterBase : MonoBehaviour
         _deadParticleSystem = transform.Find("Dead Particle System").GetComponent<ParticleSystem>();
         _winParticleSystem = transform.Find("Win Particle System").GetComponent<ParticleSystem>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _collider = GetComponentInChildren<Collider2D>();
 
         GameManager.Instance.clearedCount = 0;
     }
@@ -99,12 +101,14 @@ public abstract class CharacterBase : MonoBehaviour
     protected void StageFail()
     {
         GameManager.Instance.StageFail();
+        GameManager.Instance.IndicateStageResult(stageNum, false);
     }
 
     protected IEnumerator StageFailCoroutine()
     {
         _deadParticleSystem.Play();
         _spriteRenderer.enabled = false;
+        _collider.enabled = false;
         yield return new WaitForSeconds(1f);
         StageFail();
     }
@@ -113,8 +117,10 @@ public abstract class CharacterBase : MonoBehaviour
     {
         StartCoroutine(StageClearParticleCoroutine());
         _spriteRenderer.enabled = false;
+        _collider.enabled = false;
         yield return new WaitForSeconds(3f);
         GameManager.Instance.OneOfStagesCleared();
+        GameManager.Instance.IndicateStageResult(stageNum, true);
     }
 
     protected IEnumerator StageClearParticleCoroutine()

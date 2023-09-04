@@ -134,6 +134,8 @@ public class GameManager : MonoBehaviour
                 var playerGameObject = Instantiate(playerPrefab, startingPoint, Quaternion.identity);
                 currentInputRecorder = playerGameObject.GetComponent<InputRecorder>();
                 currentInputRecorder.StartRecord();
+                var player = playerGameObject.GetComponent<CharacterBase>();
+                player.SetStageNum(i);
             }
             else
             {
@@ -142,6 +144,8 @@ public class GameManager : MonoBehaviour
                 var decodeTarget = ghostGameObject.GetComponent<GhostCharacter>();
                 decoder.DecodeInputQueue(inputQueues[i - 1]);
                 decoder.StartDecode(decodeTarget);
+                var ghost = ghostGameObject.GetComponent<CharacterBase>();
+                ghost.SetStageNum(i);
             }
         }
         for(; i <= k_maxStage; i++)
