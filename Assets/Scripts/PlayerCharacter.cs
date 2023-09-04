@@ -61,6 +61,17 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
         }
     }
 
+    protected override void StageFail() {
+        base.StageFail();
+        GameManager.Instance.StopTimeLimiter();
+    }
+
+    protected override void StageClear()
+    {
+        base.StageClear();
+        GameManager.Instance.StopTimeLimiter();
+    }
+
     public void CannotMove() {
         isDoneMoving = true;
     }

@@ -51,7 +51,7 @@ public abstract class CharacterBase : MonoBehaviour
             isDoneMoving = true;
             _isAtEndingPoint = true;
             Debug.Log("end " + this);
-            StartCoroutine(StageClearCoroutine());
+            StageClear();
         }
 
         if (other.GetComponentInChildren<Switch>() != null) {
@@ -98,7 +98,11 @@ public abstract class CharacterBase : MonoBehaviour
         return false;
     }
 
-    protected void StageFail()
+    protected virtual void StageClear() {
+        StartCoroutine(StageClearCoroutine());
+    }
+
+    protected virtual void StageFail()
     {
         GameManager.Instance.StageFail();
     }
