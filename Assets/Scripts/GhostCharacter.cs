@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Research.Chan;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,7 +33,7 @@ public class GhostCharacter : CharacterBase, IDecodeListener
 
     protected override bool CheckDeadly(Collider2D collision)
     {
-        if (collision.CompareTag("DeadZone"))
+        if (collision.CompareTag("DeadZone") && collision.GetComponentInChildren<SwitchableTrap>() == null)
         {
             isDoneMoving = true;
             collidingDeadZones.Add(collision);
