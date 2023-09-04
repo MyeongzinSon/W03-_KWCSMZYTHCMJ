@@ -127,7 +127,7 @@ namespace Research.Chan
                     if (other.CompareTag("Player"))
                     {
                         //재활성화
-                        PlayerToggleOnTrap();
+                        //PlayerToggleOnTrap();
                     }
                 }
             }
