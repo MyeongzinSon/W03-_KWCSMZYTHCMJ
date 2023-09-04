@@ -196,14 +196,12 @@ public class GameManager : MonoBehaviour
             stageBlinds[currentStage - 1].DOFade(0f, 1f);
         }
         WaitForReloadScene();
-        ReloadScene();
     }
 
     public void StageFail()
     {
         endedCount++;
         currentInputRecorder.EndRecord();
-        ReloadScene();
     }
 
     public void StopTimeLimiter()
