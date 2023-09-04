@@ -17,7 +17,9 @@ public class TitleManager : MonoBehaviour, PlayerInputActions.IPlayerActions
     public void StartStage()
     {
         inputs.Disable();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        var targetIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        Debug.Log(SceneManager.sceneCountInBuildSettings);
+        SceneManager.LoadScene(targetIndex == SceneManager.sceneCountInBuildSettings ? 0 : targetIndex);
     }
     public void OnInteract(InputAction.CallbackContext context)
     {
