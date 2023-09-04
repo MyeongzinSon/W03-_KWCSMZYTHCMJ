@@ -204,6 +204,13 @@ public class GameManager : MonoBehaviour
         // currentInputRecorder.EndRecord();
         // ReloadScene();
     }
+
+    public void StopTimeLimiter()
+    {
+        StopCoroutine(timeLimiterCoroutine);
+        timeLimitBarTween.Kill();
+    }
+
     public void RestartPreviousStage()
     {
         currentStage--;
