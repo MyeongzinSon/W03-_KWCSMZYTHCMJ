@@ -49,15 +49,14 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
     {
         if (context.performed)
         {
-            //GameManager.Instance.StageFail();
+            GameManager.Instance.ForceReloadScene();
         }
     }
     public void OnPrevious(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            //GameManager.Instance.RestartPreviousStage();
-            
+            GameManager.Instance.RestartPreviousStage();
         }
     }
 
