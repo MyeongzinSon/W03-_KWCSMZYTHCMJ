@@ -9,18 +9,18 @@ public class RedBean : Deadly
 {
     public RedBeanType type;
     [Header("Linear")]
-    [SerializeField, HideInInspector] private LinearType linearType;
-    [SerializeField, HideInInspector] private float linearSpeed;
-    [SerializeField, HideInInspector] private Vector2 relativeTargetPosition;
+    [SerializeField] private LinearType linearType;
+    [SerializeField] private float linearSpeed;
+    [SerializeField] private Vector2 relativeTargetPosition;
     //Only For Repeat
-    [SerializeField, HideInInspector] private float interval;
+    [SerializeField] private float interval;
 
     [Header("Rotational")]
-    [SerializeField, HideInInspector] private float rotationSpeed;
+    [SerializeField] private float rotationSpeed;
 
     [Header("Circular")]
-    [SerializeField, HideInInspector] private float radius = 2f; // The radius of the circular path
-    [SerializeField, HideInInspector] private float angularSpeed = 180f; // The speed of rotation in degrees per second
+    [SerializeField] private float radius = 2f; // The radius of the circular path
+    [SerializeField] private float angularSpeed = 180f; // The speed of rotation in degrees per second
     private Vector3 centerPoint; // The center point of the circular path
     private float angle; // The current angle in degrees
 
