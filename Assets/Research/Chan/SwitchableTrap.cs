@@ -19,12 +19,14 @@ namespace Research.Chan
         private SpriteRenderer _spriteRenderer;
         
         private IEnumerator _coroutineTemporalTrap;
+        private float _toggleDuration = 3f;
+        
         private bool _isInitialized = false;
         private bool _isInitializedFromSwitch = false;
         private bool _hasTrapSet = false;
         private int _switchStageNum;
         private int _curStageNum;
-        private bool _isToggledOn = false;
+        private bool _isToggledOn = true;
         
         /*public Trap(int stageNumber, bool isInvulnerable, bool isTemporal)
         {
@@ -47,7 +49,7 @@ namespace Research.Chan
 
         public void Init(int trapStageNum, int curStageNum) {
             _isInitialized = true;
-            _isToggledOn = false;
+            _isToggledOn = true;
 
             _deadZone = transform.Find("DeadZone").gameObject;
             _playerDetect = transform.Find("PlayerDetect").gameObject;
@@ -57,7 +59,8 @@ namespace Research.Chan
             
             _spriteRenderer = transform.Find("DeadZone").GetComponent<SpriteRenderer>();
             //_spriteRenderer.color = new Color((trapNumber % 10) * 0.2f, .2f, .2f, 1f);
-
+            
+            _coroutineTemporalTrap = CoroutineTemporalTrap(_toggleDuration);
             stageNumber = trapStageNum;
             _curStageNum = curStageNum;
         }
@@ -67,16 +70,19 @@ namespace Research.Chan
             _switchStageNum = switchStageNum;
         }
 
-        public void PlayerToggleOnTrap()
+        public void PlayerToggleOffTrap()
         {
             _deadZone.SetActive(false);
             _visualIsTemporal.SetActive(false);
-            _isToggledOn = true;
+            _isToggledOn = false;
+            StopCoroutine(_coroutineTemporalTrap);
+            _coroutineTemporalTrap = CoroutineTemporalTrap(_toggleDuration);
+            StartCoroutine(_coroutineTemporalTrap);
         }
 
-        public void PlayerToggleOffTrap() {
+        public void PlayerToggleOnTrap() {
             if (isTemporal) {
-                _isToggledOn = false;
+                _isToggledOn = true;
                 _deadZone.SetActive(true);
                 _visualIsTemporal.SetActive(true);
             }
@@ -111,8 +117,7 @@ namespace Research.Chan
                 //비활성화
                 if (other.CompareTag("Player"))
                 {
-                    _deadZone.SetActive(false);
-                    _visualIsTemporal.SetActive(false);
+                    PlayerToggleOffTrap();
                 }
             }
         }
@@ -126,8 +131,7 @@ namespace Research.Chan
                     if (other.CompareTag("Player"))
                     {
                         //재활성화
-                        _deadZone.SetActive(true);
-                        _visualIsTemporal.SetActive(true);
+                        PlayerToggleOnTrap();
                     }
                 }
             }

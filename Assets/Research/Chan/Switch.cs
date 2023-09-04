@@ -28,9 +28,9 @@ public class Switch : MonoBehaviour
         if (other.CompareTag("Player")) {
             foreach (var trap in _traps) {
                 if (trap.shouldTurnOn) {
-                    trap.trap.PlayerToggleOnTrap();
-                } else {
                     trap.trap.PlayerToggleOffTrap();
+                } else {
+                    trap.trap.PlayerToggleOnTrap();
                 }
             }
         }
@@ -40,9 +40,9 @@ public class Switch : MonoBehaviour
         if (other.CompareTag("Player")) {
             foreach (var trap in _traps) {
                 if (trap.shouldTurnOn) {
-                    trap.trap.PlayerToggleOffTrap();
-                } else {
                     trap.trap.PlayerToggleOnTrap();
+                } else {
+                    trap.trap.PlayerToggleOffTrap();
                 }
             }
         }
