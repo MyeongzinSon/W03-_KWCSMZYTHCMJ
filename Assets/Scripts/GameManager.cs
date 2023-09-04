@@ -43,6 +43,14 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ForceReloadScene();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            RestartPreviousStage();
+        }
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.T))
         {
