@@ -15,12 +15,16 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected ParticleSystem _particleSystem;
     protected SpriteRenderer _spriteRenderer;
+    
+    private bool _isAtEndingPoint = false;
 
     protected virtual void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         _particleSystem = GetComponentInChildren<ParticleSystem>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        GameManager.Instance.clearedCount = 0;
     }
 
     protected virtual void Update()
@@ -32,10 +36,12 @@ public abstract class CharacterBase : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         CheckDeadly(other);
-        if (other.tag == "EndingPoint")
+        if (other.tag == "EndingPoint" && !_isAtEndingPoint)
         {
             Debug.Log("end");
             isDoneMoving = true;
+            _isAtEndingPoint = true;
+            Debug.Log("end " + this);
             GameManager.Instance.OneOfStagesCleared();
         }
     }
@@ -66,7 +72,7 @@ public abstract class CharacterBase : MonoBehaviour
         _particleSystem.Play();
         _spriteRenderer.enabled = false;
         isDoneMoving = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         StageFail();
     }
 }

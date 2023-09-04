@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
 
     int currentStage = 1;
-    int clearedCount = 0;
+    public int clearedCount = 0;
 
     private void Awake()
     {
@@ -134,8 +134,9 @@ public class GameManager : MonoBehaviour
     }
     void ReloadScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         clearedCount = 0;
+        Debug.Log("cc B " + clearedCount);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -146,8 +147,10 @@ public class GameManager : MonoBehaviour
     public void OneOfStagesCleared()
     {
         clearedCount++;
+        Debug.Log("cc A " + clearedCount);
         if (clearedCount >= currentStage)
         {
+            Debug.Log(clearedCount);
             if (currentStage == k_maxStage) Debug.Log("Level Cleared!");
             else LevelClear();
         }
