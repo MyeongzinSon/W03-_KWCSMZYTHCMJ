@@ -27,6 +27,7 @@ namespace Research.Chan
         private int _switchStageNum;
         private int _curStageNum;
         private bool _isToggledOn = true;
+        public bool IsToggledOn => _isToggledOn;
         
         /*public Trap(int stageNumber, bool isInvulnerable, bool isTemporal)
         {
@@ -131,7 +132,7 @@ namespace Research.Chan
                     if (other.CompareTag("Player"))
                     {
                         //재활성화
-                        PlayerToggleOnTrap();
+                        //PlayerToggleOnTrap();
                     }
                 }
             }
@@ -140,8 +141,7 @@ namespace Research.Chan
         private IEnumerator CoroutineTemporalTrap(float duration)
         {
             yield return new WaitForSeconds(duration);
-            _deadZone.SetActive(true);
-            _visualIsTemporal.SetActive(true);
+            PlayerToggleOnTrap();
         }
     }
 }

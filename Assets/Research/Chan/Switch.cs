@@ -7,10 +7,12 @@ using UnityEngine;
 
 public class Switch : MonoBehaviour
 {
-    [SerializeField] private List<TrapData> _traps = new List<TrapData>();
+    [SerializeField] private List<TrapData> _trapDatas = new List<TrapData>();
 
     private int _switchStageNum;
     private int _curStageNum;
+
+    private bool _isTurnedOn = false;
 
     void Awake() {
         //Init(_traps);
@@ -19,18 +21,20 @@ public class Switch : MonoBehaviour
     public void Init(int switchStageNum, int curStageNum) {
         _switchStageNum = switchStageNum;
         _curStageNum = curStageNum;
-        foreach (var trap in _traps) {
+        foreach (var trap in _trapDatas) {
             trap.trap.InitFromSwitch(_switchStageNum);
         }
     }
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            foreach (var trap in _traps) {
-                if (trap.shouldTurnOn) {
-                    trap.trap.PlayerToggleOffTrap();
+            foreach (var trapData in _trapDatas) {
+                if (trapData.shouldTurnOn) {
+                    if (trapData.trap.IsToggledOn) {
+                        trapData.trap.PlayerToggleOffTrap();
+                    }
                 } else {
-                    trap.trap.PlayerToggleOnTrap();
+                    //trap.trap.PlayerToggleOnTrap();
                 }
             }
         }
@@ -38,11 +42,13 @@ public class Switch : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            foreach (var trap in _traps) {
+            foreach (var trap in _trapDatas) {
                 if (trap.shouldTurnOn) {
-                    trap.trap.PlayerToggleOnTrap();
+                    //trap.trap.PlayerToggleOnTrap();
                 } else {
-                    trap.trap.PlayerToggleOffTrap();
+                    if (trap.trap.IsToggledOn) {
+                        trap.trap.PlayerToggleOffTrap();
+                    }
                 }
             }
         }

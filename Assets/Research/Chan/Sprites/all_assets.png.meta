@@ -608,6 +608,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Switch_0
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab16364e695de0b48b6da952dfd40446
+      internalID: -1522611519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -642,6 +663,7 @@ TextureImporter:
       LayserFrame_0: -1902380691
       Layser_0: 1479098456
       RedBean_0: -310729325
+      Switch_0: -1522611519
       Trap_0: -1921616613
       Wall_0: 502575191
   spritePackingTag: 

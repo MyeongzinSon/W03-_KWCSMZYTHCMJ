@@ -63,6 +63,7 @@ SpriteAtlas:
   - {fileID: -66821972, guid: 6beb29f32b0a8664ba11c14a94a9c922, type: 3}
   - {fileID: -1076047906, guid: 6beb29f32b0a8664ba11c14a94a9c922, type: 3}
   - {fileID: -1921616613, guid: 6beb29f32b0a8664ba11c14a94a9c922, type: 3}
+  - {fileID: -1522611519, guid: 6beb29f32b0a8664ba11c14a94a9c922, type: 3}
   - {fileID: -310729325, guid: 6beb29f32b0a8664ba11c14a94a9c922, type: 3}
   - {fileID: -1417877401, guid: 6beb29f32b0a8664ba11c14a94a9c922, type: 3}
   - {fileID: -9804716, guid: 6beb29f32b0a8664ba11c14a94a9c922, type: 3}
@@ -88,6 +89,7 @@ SpriteAtlas:
   - Floor_1_3
   - Floor_1_1
   - Trap_0
+  - Switch_0
   - RedBean_0
   - Layser_0
   - Floor_0_7
