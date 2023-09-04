@@ -35,7 +35,6 @@ public class GhostCharacter : CharacterBase, IDecodeListener
     {
         if (collision.CompareTag("DeadZone") && collision.GetComponentInChildren<SwitchableTrap>() != null)
         {
-            isDoneMoving = true;
             collidingDeadZones.Add(collision);
             StartCoroutine(CheckDeadlyCoroutine(collision));
             return true;
@@ -47,6 +46,7 @@ public class GhostCharacter : CharacterBase, IDecodeListener
         yield return new WaitForSeconds(delay);
         if (collidingDeadZones.Contains(collision))
         {
+            isDoneMoving = true;
             StartCoroutine(StageFailCoroutine());
             StageFail();
         }
