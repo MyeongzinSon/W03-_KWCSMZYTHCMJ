@@ -12,6 +12,8 @@ public class Switch : MonoBehaviour
     private int _switchStageNum;
     private int _curStageNum;
 
+    private bool _isTurnedOn = false;
+
     void Awake() {
         //Init(_traps);
     }
@@ -28,9 +30,11 @@ public class Switch : MonoBehaviour
         if (other.CompareTag("Player")) {
             foreach (var trap in _traps) {
                 if (trap.shouldTurnOn) {
-                    trap.trap.PlayerToggleOffTrap();
+                    if (trap.trap.IsToggledOn) {
+                        trap.trap.PlayerToggleOffTrap();
+                    }
                 } else {
-                    trap.trap.PlayerToggleOnTrap();
+                    //trap.trap.PlayerToggleOnTrap();
                 }
             }
         }
@@ -40,9 +44,11 @@ public class Switch : MonoBehaviour
         if (other.CompareTag("Player")) {
             foreach (var trap in _traps) {
                 if (trap.shouldTurnOn) {
-                    trap.trap.PlayerToggleOnTrap();
+                    //trap.trap.PlayerToggleOnTrap();
                 } else {
-                    trap.trap.PlayerToggleOffTrap();
+                    if (trap.trap.IsToggledOn) {
+                        trap.trap.PlayerToggleOffTrap();
+                    }
                 }
             }
         }
