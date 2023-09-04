@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
     public int endedCount = 0;
     private bool isWaitForReloadScene = false;
     private PlayerCharacter currentPlayer;
+    private IEnumerator timeLimiterCoroutine;
+
+    private DG.Tweening.Core.TweenerCore<UnityEngine.Vector3, UnityEngine.Vector3, DG.Tweening.Plugins.Options.VectorOptions> timeLimitBarTween;
 
     private void Awake()
     {
@@ -176,8 +179,11 @@ public class GameManager : MonoBehaviour
             }
         }
         
+        StopAllCoroutines();
         isWaitForReloadScene = false;
-        StartCoroutine(TimeLimiter());
+        if (timeLimitBarTween != null) timeLimitBarTween.Kill();
+        timeLimiterCoroutine = TimeLimiter();
+        StartCoroutine(timeLimiterCoroutine);
     }
 
     public void LevelClear()
@@ -215,7 +221,7 @@ public class GameManager : MonoBehaviour
     IEnumerator TimeLimiter() {
         foreach (var panel in timeoutPanels) panel.SetActive(false);
         timeLimitBar.transform.localScale = originalTimeLimitBarSize;
-        timeLimitBar.transform.DOScaleX(0f, timeLimits[currentStage - 1]).SetEase(Ease.Linear);
+        timeLimitBarTween = timeLimitBar.transform.DOScaleX(0f, timeLimits[currentStage - 1]).SetEase(Ease.Linear);
         yield return new WaitForSeconds(timeLimits[currentStage - 1]);
         clearedCount = 0;
         endedCount = 0;

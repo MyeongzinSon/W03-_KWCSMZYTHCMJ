@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Research.Chan;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Switch : MonoBehaviour
 {
@@ -34,6 +35,12 @@ public class Switch : MonoBehaviour
                     trapData.trap.PlayerToggleOffTrap();
                 }
             }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.GetComponent<CharacterBase>() != null) {
+            
         }
     }
 
