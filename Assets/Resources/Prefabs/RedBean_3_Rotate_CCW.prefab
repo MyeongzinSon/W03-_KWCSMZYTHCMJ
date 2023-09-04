@@ -169,6 +169,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2741596491752483053}
     m_Modifications:
+    - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5112815938388276970, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
       propertyPath: m_Name
       value: RedBean_L0
@@ -231,6 +235,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2741596491752483053}
     m_Modifications:
+    - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5112815938388276970, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
       propertyPath: m_Name
       value: RedBean_D0
@@ -293,6 +301,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2741596491752483053}
     m_Modifications:
+    - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5112815938388276970, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
       propertyPath: m_Name
       value: RedBean_D1
@@ -355,6 +367,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2741596491752483053}
     m_Modifications:
+    - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5112815938388276970, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
       propertyPath: m_Name
       value: RedBean_U0
@@ -417,6 +433,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2741596491752483053}
     m_Modifications:
+    - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5112815938388276970, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
       propertyPath: m_Name
       value: RedBean_R0
@@ -479,6 +499,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2741596491752483053}
     m_Modifications:
+    - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5112815938388276970, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
       propertyPath: m_Name
       value: RedBean_R1
@@ -541,6 +565,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2741596491752483053}
     m_Modifications:
+    - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5112815938388276970, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
       propertyPath: m_Name
       value: RedBean_U1
@@ -603,6 +631,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2741596491752483053}
     m_Modifications:
+    - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5112815938388276970, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
       propertyPath: m_Name
       value: RedBean_L1
