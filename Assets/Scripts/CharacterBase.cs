@@ -12,6 +12,7 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected Vector2 inputDirection;
     protected bool isDoneMoving; //this character has reached its ending point.
+    protected int stageNum;
 
     protected ParticleSystem _particleSystem;
     protected SpriteRenderer _spriteRenderer;
@@ -46,6 +47,10 @@ public abstract class CharacterBase : MonoBehaviour
         }
     }
 
+    public void SetStageNum(int stage)
+    {
+        stageNum = stage;
+    }
     private void Move()
     {
         var velocity = inputDirection;

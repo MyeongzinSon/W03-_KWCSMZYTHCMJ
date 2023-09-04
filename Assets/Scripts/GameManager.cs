@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject ghostPrefab;
     [SerializeField] Transform[] startingPoints = new Transform[k_maxStage];
+    [SerializeField] StageResultIndicator[] stageResultIndicators;
 
     List<GameObject> playerAndGhosts = new();
     InputRecorder currentInputRecorder;
@@ -52,6 +53,39 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             LevelClear();
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            IndicateStageResult(1, true);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            IndicateStageResult(2, true);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            IndicateStageResult(3, true);
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            IndicateStageResult(4, true);
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            IndicateStageResult(1, false);
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            IndicateStageResult(2, false);
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            IndicateStageResult(3, false);
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            IndicateStageResult(4, false);
         }
     }
 
@@ -156,4 +190,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void IndicateStageResult(int stageNum, bool isCleared)
+    {
+        stageResultIndicators[stageNum - 1].ShowResult(isCleared);
+    }
 }
