@@ -48,7 +48,6 @@ public class GhostCharacter : CharacterBase, IDecodeListener
         {
             isDoneMoving = true;
             StartCoroutine(StageFailCoroutine());
-            StageFail();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

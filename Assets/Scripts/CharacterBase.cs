@@ -109,7 +109,7 @@ public abstract class CharacterBase : MonoBehaviour
         _deadParticleSystem.Play();
         _spriteRenderer.enabled = false;
         _collider.enabled = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         StageFail();
     }
 
