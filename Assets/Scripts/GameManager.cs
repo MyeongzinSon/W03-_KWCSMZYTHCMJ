@@ -4,8 +4,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Research.Chan;
-using Unity.VisualScripting;
 //using UnityEngine.InputSystem;
+
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject ghostPrefab;
     [SerializeField] Transform[] startingPoints = new Transform[k_maxStage];
     [SerializeField] StageResultIndicator[] stageResultIndicators;
+    [SerializeField] SpriteRenderer[] stageBlinds;
 
     List<GameObject> playerAndGhosts = new();
     InputRecorder currentInputRecorder;
@@ -157,9 +159,19 @@ public class GameManager : MonoBehaviour
                 ghost.SetStageNum(i);
             }
         }
-        for(; i <= k_maxStage; i++)
+        for(i=1; i <= k_maxStage; i++)
         {
-
+            if (i <= currentStage) {
+                Color c = stageBlinds[i - 1].color;
+                //Debug.Log("cc " + c);
+                c.a = 0f;
+                stageBlinds[i - 1].color = c;
+            } else {
+                Color c = stageBlinds[i - 1].color;
+                //Debug.Log("cc " + c);
+                c.a = 1f;
+                stageBlinds[i - 1].color = c;
+            }
         }
 
         isWaitForReloadScene = false;
@@ -172,6 +184,7 @@ public class GameManager : MonoBehaviour
         inputQueues[currentStage - 1] = recordedQueue;
         currentStage++;
         //ReloadScene();
+        stageBlinds[currentStage - 1].DOFade(0f, 1f);
         WaitForReloadScene();
     }
     public void StageFail()
