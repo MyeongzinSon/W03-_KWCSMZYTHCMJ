@@ -911,6 +911,7 @@ MonoBehaviour:
   traps:
   - {fileID: 1165472539}
   - {fileID: 1303629190}
+  filter: {fileID: 0}
 --- !u!4 &312702052
 Transform:
   m_ObjectHideFlags: 0
@@ -1045,6 +1046,7 @@ MonoBehaviour:
   traps:
   - {fileID: 217728501}
   - {fileID: 1423323522}
+  filter: {fileID: 0}
 --- !u!4 &365737272
 Transform:
   m_ObjectHideFlags: 0
@@ -1727,6 +1729,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 781489837}
     m_Modifications:
+    - target: {fileID: 5478697890634098383, guid: 4082e45a08733c14d947c5666edd0d44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8876055359154335706, guid: 4082e45a08733c14d947c5666edd0d44, type: 3}
       propertyPath: m_Name
       value: Trap_F
@@ -2262,6 +2268,7 @@ MonoBehaviour:
   - {fileID: 681569631}
   - {fileID: 147071453}
   - {fileID: 353909965}
+  filter: {fileID: 0}
 --- !u!1 &798504437
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,6 +2492,7 @@ MonoBehaviour:
   - {fileID: 407740611}
   - {fileID: 538599648}
   - {fileID: 575677903}
+  filter: {fileID: 1380543204}
 --- !u!1 &858959990
 GameObject:
   m_ObjectHideFlags: 0
