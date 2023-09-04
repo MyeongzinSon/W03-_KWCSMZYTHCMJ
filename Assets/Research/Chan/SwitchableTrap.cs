@@ -11,6 +11,7 @@ namespace Research.Chan
         [SerializeField] protected int trapNumber;
         [SerializeField] protected bool isInvulnerable;
         [SerializeField] protected bool isTemporal;
+        [SerializeField] private float toggleDuration = 3f;
         
         private GameObject _deadZone;
         private GameObject _playerDetect;
@@ -19,7 +20,6 @@ namespace Research.Chan
         private SpriteRenderer _spriteRenderer;
         
         private IEnumerator _coroutineTemporalTrap;
-        private float _toggleDuration = 3f;
         
         private bool _isInitialized = false;
         private bool _isInitializedFromSwitch = false;
@@ -61,7 +61,7 @@ namespace Research.Chan
             _spriteRenderer = transform.Find("DeadZone").GetComponent<SpriteRenderer>();
             //_spriteRenderer.color = new Color((trapNumber % 10) * 0.2f, .2f, .2f, 1f);
             
-            _coroutineTemporalTrap = CoroutineTemporalTrap(_toggleDuration);
+            _coroutineTemporalTrap = CoroutineTemporalTrap(toggleDuration);
             stageNumber = trapStageNum;
             _curStageNum = curStageNum;
         }
@@ -77,7 +77,7 @@ namespace Research.Chan
             _visualIsTemporal.SetActive(false);
             _isToggledOn = false;
             StopCoroutine(_coroutineTemporalTrap);
-            _coroutineTemporalTrap = CoroutineTemporalTrap(_toggleDuration);
+            _coroutineTemporalTrap = CoroutineTemporalTrap(toggleDuration);
             StartCoroutine(_coroutineTemporalTrap);
         }
 

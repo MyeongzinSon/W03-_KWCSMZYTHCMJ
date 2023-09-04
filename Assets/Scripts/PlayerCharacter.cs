@@ -39,6 +39,21 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
             recorder.RecordCurrentInput(inputDirection);
         }
     }
+    public void OnRestart(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameManager.Instance.StageFail();
+        }
+    }
+    public void OnPrevious(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameManager.Instance.RestartPreviousStage();
+            
+        }
+    }
 
     void Interact()
     {

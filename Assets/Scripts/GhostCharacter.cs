@@ -27,19 +27,23 @@ public class GhostCharacter : CharacterBase, IDecodeListener
         Debug.DrawRay(transform.position, Vector2.up, Color.red, 1);
     }
 
-    protected override void CheckDeadly(Collider2D collision)
+    protected override bool CheckDeadly(Collider2D collision)
     {
         if (collision.CompareTag("DeadZone"))
         {
+            isDoneMoving = true;
             collidingDeadZones.Add(collision);
             StartCoroutine(CheckDeadlyCoroutine(collision));
+            return true;
         }
+        return false;
     }
     IEnumerator CheckDeadlyCoroutine(Collider2D collision, float delay = 0.05f)
     {
         yield return new WaitForSeconds(delay);
         if (collidingDeadZones.Contains(collision))
         {
+            StartCoroutine(StageFailCoroutine());
             StageFail();
         }
     }
@@ -53,7 +57,7 @@ public class GhostCharacter : CharacterBase, IDecodeListener
             }
             else
             {
-                Debug.LogError($"¸®½ºÆ®¿¡ µî·ÏµÇÁö ¾ÊÀº DeadZoneÀÓ! {collision.gameObject.name}({collision.GetInstanceID()})");
+                Debug.LogError($"ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DeadZoneï¿½ï¿½! {collision.gameObject.name}({collision.GetInstanceID()})");
             }
         }
     }

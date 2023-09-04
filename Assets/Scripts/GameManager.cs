@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject ghostPrefab;
     [SerializeField] Transform[] startingPoints = new Transform[k_maxStage];
+    [SerializeField] StageResultIndicator[] stageResultIndicators;
 
     List<GameObject> playerAndGhosts = new();
     InputRecorder currentInputRecorder;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     int currentStage = 1;
     public int clearedCount = 0;
+    public int endedCount = 0;
 
     private void Awake()
     {
@@ -41,18 +43,45 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            RestartPreviousStage();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StageFail();
-        }
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.T))
         {
             LevelClear();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            IndicateStageResult(1, true);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            IndicateStageResult(2, true);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            IndicateStageResult(3, true);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            IndicateStageResult(4, true);
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            IndicateStageResult(1, false);
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            IndicateStageResult(2, false);
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            IndicateStageResult(3, false);
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            IndicateStageResult(4, false);
+        }
+#endif
     }
 
 
@@ -86,6 +115,7 @@ public class GameManager : MonoBehaviour
         }
         
         playerAndGhosts.Clear();
+        stageResultIndicators.ToList().ForEach(i => i.ClearResult());
 
         int i = 1;
         for (; i <= currentStage; i++)
@@ -123,8 +153,9 @@ public class GameManager : MonoBehaviour
     }
     public void StageFail()
     {
-        currentInputRecorder.EndRecord();
-        ReloadScene();
+        endedCount++;
+        // currentInputRecorder.EndRecord();
+        // ReloadScene();
     }
     public void RestartPreviousStage()
     {
@@ -132,9 +163,18 @@ public class GameManager : MonoBehaviour
         if (currentStage == 0) currentStage = 1;
         ReloadScene();
     }
+
+    void ForceReloadScene() {
+        clearedCount = 0;
+        endedCount = 0;
+        Debug.Log("cc B " + clearedCount);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     void ReloadScene()
     {
         clearedCount = 0;
+        endedCount = 0;
         Debug.Log("cc B " + clearedCount);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -146,8 +186,10 @@ public class GameManager : MonoBehaviour
 
     public void OneOfStagesCleared()
     {
+        endedCount++;
         clearedCount++;
         Debug.Log("cc A " + clearedCount);
+
         if (clearedCount >= currentStage)
         {
             Debug.Log(clearedCount);
@@ -156,4 +198,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void IndicateStageResult(int stageNum, bool isCleared)
+    {
+        stageResultIndicators[stageNum - 1].ShowResult(isCleared);
+    }
 }
