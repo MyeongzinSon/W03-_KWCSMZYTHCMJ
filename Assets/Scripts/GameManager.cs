@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            RestartPreviousStage();
+        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             StageFail();
@@ -114,16 +118,23 @@ public class GameManager : MonoBehaviour
         currentInputRecorder.TryGetInputQueue(out var recordedQueue);
         inputQueues[currentStage - 1] = recordedQueue;
         currentStage++;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-        clearedCount = 0;
+        ReloadScene();
 
     }
     public void StageFail()
     {
         currentInputRecorder.EndRecord();
+        ReloadScene();
+    }
+    public void RestartPreviousStage()
+    {
+        currentStage--;
+        if (currentStage == 0) currentStage = 1;
+        ReloadScene();
+    }
+    void ReloadScene()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
         clearedCount = 0;
     }
 

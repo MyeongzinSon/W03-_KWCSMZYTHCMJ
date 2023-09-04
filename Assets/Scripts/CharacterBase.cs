@@ -26,6 +26,7 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
+        CheckDeadly(other);
         if (other.tag == "EndingPoint")
         {
             Debug.Log("end");
@@ -42,11 +43,16 @@ public abstract class CharacterBase : MonoBehaviour
         rigidBody.velocity = velocity.normalized * speed;
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    protected virtual void CheckDeadly(Collider2D collision)
     {
-        if (other.gameObject.GetComponent<Deadly>() != null)
+        if (collision.CompareTag("DeadZone"))
         {
-            GameManager.Instance.StageFail();
+            StageFail();
         }
+    }
+
+    protected void StageFail()
+    {
+        GameManager.Instance.StageFail();
     }
 }
