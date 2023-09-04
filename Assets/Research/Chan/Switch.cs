@@ -9,12 +9,19 @@ public class Switch : MonoBehaviour
 {
     [SerializeField] private List<TrapData> _traps = new List<TrapData>();
 
+    private int _switchStageNum;
+    private int _curStageNum;
+
     void Awake() {
-        Init(_traps);
+        //Init(_traps);
     }
 
-    private void Init(List<TrapData> targetTraps) {
-        _traps = targetTraps;
+    public void Init(int switchStageNum, int curStageNum) {
+        _switchStageNum = switchStageNum;
+        _curStageNum = curStageNum;
+        foreach (var trap in _traps) {
+            trap.trap.InitFromSwitch(_switchStageNum);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other) {

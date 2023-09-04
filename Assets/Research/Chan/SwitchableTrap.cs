@@ -20,6 +20,10 @@ namespace Research.Chan
         
         private IEnumerator _coroutineTemporalTrap;
         private bool _isInitialized = false;
+        private bool _isInitializedFromSwitch = false;
+        private bool _hasTrapSet = false;
+        private int _switchStageNum;
+        private int _curStageNum;
         private bool _isToggledOn = false;
         
         /*public Trap(int stageNumber, bool isInvulnerable, bool isTemporal)
@@ -32,6 +36,13 @@ namespace Research.Chan
         private void Awake()
         {
             //Init(1, 2);
+        }
+
+        private void Update() {
+            if (_isInitialized && _isInitializedFromSwitch && !_hasTrapSet) {
+                SetTrap();
+                _hasTrapSet = true;
+            }
         }
 
         public void Init(int trapStageNum, int curStageNum) {
@@ -48,8 +59,12 @@ namespace Research.Chan
             //_spriteRenderer.color = new Color((trapNumber % 10) * 0.2f, .2f, .2f, 1f);
 
             stageNumber = trapStageNum;
+            _curStageNum = curStageNum;
+        }
 
-            SetTrap(curStageNum);
+        public void InitFromSwitch(int switchStageNum) {
+            _isInitializedFromSwitch = true;
+            _switchStageNum = switchStageNum;
         }
 
         public void PlayerToggleOnTrap()
@@ -67,17 +82,14 @@ namespace Research.Chan
             }
         }
 
-        public void SetTrap(int curStageNumber)
+        public void SetTrap()
         {
-            if (stageNumber < curStageNumber)
+            if (_curStageNum >= _switchStageNum)
             {
                 isInvulnerable = false;
-            } else if (stageNumber == curStageNumber)
+            } else if (_curStageNum < _switchStageNum)
             {
                 isInvulnerable = true;
-            } else {
-                this.gameObject.SetActive(false);
-                return;
             }
             
             if (isInvulnerable)

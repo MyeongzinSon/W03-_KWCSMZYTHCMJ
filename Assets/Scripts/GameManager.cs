@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     List<GameObject> playerAndGhosts = new();
     InputRecorder currentInputRecorder;
     Queue<InputInfo>[] inputQueues = new Queue<InputInfo>[k_maxStage - 1];
+    List<Switch> switchs;
     List<SwitchableTrap> traps;
 
 
@@ -62,6 +63,15 @@ public class GameManager : MonoBehaviour
 
     public void StartStage()
     {
+        switchs = new List<Switch>();
+        for (int si = 0; si < k_maxStage; si++) {
+            var l = GameObject.Find("Stage " + (si + 1));
+            List<Switch> sl = l.GetComponentsInChildren<Switch>().ToList();
+            if (sl.Count == 0) continue;
+            sl.ForEach(s => s.Init(si + 1, currentStage));
+            switchs.AddRange(sl);
+        }
+
         traps = new List<SwitchableTrap>();
         for (int ti = 0; ti < k_maxStage; ti++) {
             var l = GameObject.Find("Stage " + (ti + 1));
