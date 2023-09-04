@@ -13,9 +13,14 @@ public abstract class CharacterBase : MonoBehaviour
     protected Vector2 inputDirection;
     protected bool isDoneMoving; //this character has reached its ending point.
 
+    protected ParticleSystem _particleSystem;
+    protected SpriteRenderer _spriteRenderer;
+
     protected virtual void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected virtual void Update()
@@ -42,17 +47,26 @@ public abstract class CharacterBase : MonoBehaviour
         velocity.y = Mathf.Abs(velocity.y) > k_inputCriterionSin ? Mathf.Sign(velocity.y) : 0;
         rigidBody.velocity = velocity.normalized * speed;
     }
-
+ 
     protected virtual void CheckDeadly(Collider2D collision)
     {
         if (collision.CompareTag("DeadZone"))
         {
-            StageFail();
+            StartCoroutine(StageFailCoroutine());
         }
     }
 
     protected void StageFail()
     {
         GameManager.Instance.StageFail();
+    }
+
+    IEnumerator StageFailCoroutine()
+    {
+        _particleSystem.Play();
+        _spriteRenderer.enabled = false;
+        isDoneMoving = true;
+        yield return new WaitForSeconds(0.5f);
+        StageFail();
     }
 }
