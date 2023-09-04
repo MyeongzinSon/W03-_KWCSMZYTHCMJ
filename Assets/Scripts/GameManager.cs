@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Research.Chan;
 using Unity.VisualScripting;
+//using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class GameManager : MonoBehaviour
     List<Switch> switchs;
     List<SwitchableTrap> traps;
 
+    bool isWaitForReloadScene = false;
+    //PlayerInputActions inputAction;
+
 
     int currentStage = 1;
     public int clearedCount = 0;
@@ -35,6 +39,11 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // inputAction = new PlayerInputActions();
+            // inputAction.Player.Interact.started += ctx => {
+            //     if (isWaitForReloadScene) ReloadScene();
+            // };
         }
         else
         {
@@ -152,6 +161,8 @@ public class GameManager : MonoBehaviour
         {
 
         }
+
+        isWaitForReloadScene = false;
     }
 
     public void LevelClear()
@@ -160,8 +171,8 @@ public class GameManager : MonoBehaviour
         currentInputRecorder.TryGetInputQueue(out var recordedQueue);
         inputQueues[currentStage - 1] = recordedQueue;
         currentStage++;
-        ReloadScene();
-
+        //ReloadScene();
+        WaitForReloadScene();
     }
     public void StageFail()
     {
@@ -174,6 +185,14 @@ public class GameManager : MonoBehaviour
         currentStage--;
         if (currentStage == 0) currentStage = 1;
         ReloadScene();
+    }
+
+    void WaitForReloadScene() {
+        isWaitForReloadScene = true;
+    }
+
+    public void ClearReloadScene() {
+        if (isWaitForReloadScene) ReloadScene();
     }
 
     void ForceReloadScene() {

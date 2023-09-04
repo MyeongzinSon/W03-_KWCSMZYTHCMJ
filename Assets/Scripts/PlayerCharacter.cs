@@ -24,6 +24,7 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
         if (context.performed)
         {
             Interact();
+            GameManager.Instance.ClearReloadScene();
             if (recorder.IsRecording)
             {
                 recorder.RecordCurrentInput(true);
