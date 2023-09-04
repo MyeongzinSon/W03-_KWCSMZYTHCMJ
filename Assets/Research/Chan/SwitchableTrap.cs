@@ -84,7 +84,7 @@ namespace Research.Chan
         public void PlayerToggleOnTrap() {
             if (isTemporal) {
                 _isToggledOn = true;
-                _deadZone.SetActive(true);
+                 _deadZone.SetActive(true);
                 _visualIsTemporal.SetActive(true);
             }
         }
