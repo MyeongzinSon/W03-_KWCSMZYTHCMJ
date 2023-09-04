@@ -35,7 +35,6 @@ public class GhostCharacter : CharacterBase, IDecodeListener
     {
         if (collision.CompareTag("DeadZone") && (collision.GetComponentInParent<SwitchableTrap>() != null || collision.GetComponent<Switch>() != null))
         {
-            isDoneMoving = true;
             collidingDeadZones.Add(collision);
             StartCoroutine(CheckDeadlyCoroutine(collision));
             return true;
@@ -47,13 +46,14 @@ public class GhostCharacter : CharacterBase, IDecodeListener
         yield return new WaitForSeconds(delay);
         if (collidingDeadZones.Contains(collision))
         {
+            isDoneMoving = true;
             StartCoroutine(StageFailCoroutine());
             StageFail();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("DeadZone"))
+        if (collision.CompareTag("DeadZone") && collision.GetComponentInChildren<SwitchableTrap>() != null)
         {
             if (collidingDeadZones.Contains(collision))
             {
