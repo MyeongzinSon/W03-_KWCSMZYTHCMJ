@@ -15,7 +15,6 @@ namespace Research.Chan
         
         private GameObject _deadZone;
         private GameObject _playerDetect;
-        private GameObject _visualIsTemporal;
         
         private SpriteRenderer _spriteRenderer;
         
@@ -54,9 +53,7 @@ namespace Research.Chan
 
             _deadZone = transform.Find("DeadZone").gameObject;
             _playerDetect = transform.Find("PlayerDetect").gameObject;
-            _visualIsTemporal = transform.Find("VisualIsTemporal").gameObject;
 
-            _visualIsTemporal.gameObject.SetActive(isTemporal);
             
             _spriteRenderer = transform.Find("DeadZone").GetComponent<SpriteRenderer>();
             //_spriteRenderer.color = new Color((trapNumber % 10) * 0.2f, .2f, .2f, 1f);
@@ -74,7 +71,6 @@ namespace Research.Chan
         public void PlayerToggleOffTrap()
         {
             _deadZone.SetActive(false);
-            _visualIsTemporal.SetActive(false);
             _isToggledOn = false;
             StopCoroutine(_coroutineTemporalTrap);
             _coroutineTemporalTrap = CoroutineTemporalTrap(toggleDuration);
@@ -85,7 +81,6 @@ namespace Research.Chan
             if (isTemporal) {
                 _isToggledOn = true;
                  _deadZone.SetActive(true);
-                _visualIsTemporal.SetActive(true);
             }
         }
 
