@@ -4,9 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Research.Chan;
-//using UnityEngine.InputSystem;
-
 using DG.Tweening;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform[] startingPoints = new Transform[k_maxStage];
     [SerializeField] StageResultIndicator[] stageResultIndicators;
     [SerializeField] SpriteRenderer[] stageBlinds;
+    [SerializeField] bool isDebugMode = false;
 
     List<GameObject> playerAndGhosts = new();
     InputRecorder currentInputRecorder;
@@ -27,13 +27,11 @@ public class GameManager : MonoBehaviour
     List<Switch> switchs;
     List<SwitchableTrap> traps;
 
-    bool isWaitForReloadScene = false;
-    //PlayerInputActions inputAction;
-
 
     int currentStage = 1;
     public int clearedCount = 0;
     public int endedCount = 0;
+    private bool isWaitForReloadScene = false;
 
     private void Awake()
     {
@@ -41,17 +39,13 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
-
-            // inputAction = new PlayerInputActions();
-            // inputAction.Player.Interact.started += ctx => {
-            //     if (isWaitForReloadScene) ReloadScene();
-            // };
         }
         else
         {
             Destroy(gameObject);
         }
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -159,21 +153,23 @@ public class GameManager : MonoBehaviour
                 ghost.SetStageNum(i);
             }
         }
-        for(i=1; i <= k_maxStage; i++)
-        {
-            if (i <= currentStage) {
-                Color c = stageBlinds[i - 1].color;
-                //Debug.Log("cc " + c);
-                c.a = 0f;
-                stageBlinds[i - 1].color = c;
-            } else {
-                Color c = stageBlinds[i - 1].color;
-                //Debug.Log("cc " + c);
-                c.a = 1f;
-                stageBlinds[i - 1].color = c;
+        if (!isDebugMode) {
+            for(i = 1; i <= k_maxStage; i++)
+            {
+                if (i <= currentStage) {
+                    Color c = stageBlinds[i - 1].color;
+                    //Debug.Log("cc " + c);
+                    c.a = 0f;
+                    stageBlinds[i - 1].color = c;
+                } else {
+                    Color c = stageBlinds[i - 1].color;
+                    //Debug.Log("cc " + c);
+                    c.a = 1f;
+                    stageBlinds[i - 1].color = c;
+                }
             }
         }
-
+        
         isWaitForReloadScene = false;
     }
 
@@ -183,10 +179,12 @@ public class GameManager : MonoBehaviour
         currentInputRecorder.TryGetInputQueue(out var recordedQueue);
         inputQueues[currentStage - 1] = recordedQueue;
         currentStage++;
-        //ReloadScene();
-        stageBlinds[currentStage - 1].DOFade(0f, 1f);
+        if (!isDebugMode) {
+            stageBlinds[currentStage - 1].DOFade(0f, 1f);
+        }
         WaitForReloadScene();
     }
+
     public void StageFail()
     {
         endedCount++;
@@ -200,12 +198,15 @@ public class GameManager : MonoBehaviour
         ReloadScene();
     }
 
-    void WaitForReloadScene() {
-        isWaitForReloadScene = true;
+    public void ClearReloadScene() {
+        if (isWaitForReloadScene) {
+            isWaitForReloadScene = false;
+            ReloadScene();
+        }
     }
 
-    public void ClearReloadScene() {
-        if (isWaitForReloadScene) ReloadScene();
+    void WaitForReloadScene() {
+        isWaitForReloadScene = true;
     }
 
     void ForceReloadScene() {
