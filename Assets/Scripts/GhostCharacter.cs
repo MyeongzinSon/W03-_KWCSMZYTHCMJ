@@ -33,7 +33,7 @@ public class GhostCharacter : CharacterBase, IDecodeListener
 
     protected override bool CheckDeadly(Collider2D collision)
     {
-        if (collision.CompareTag("DeadZone") && collision.GetComponentInChildren<SwitchableTrap>() != null)
+        if (collision.CompareTag("DeadZone") && (collision.GetComponentInParent<SwitchableTrap>() != null || collision.GetComponent<Switch>() != null))
         {
             isDoneMoving = true;
             collidingDeadZones.Add(collision);
