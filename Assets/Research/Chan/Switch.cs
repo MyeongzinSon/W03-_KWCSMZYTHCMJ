@@ -22,6 +22,7 @@ public class Switch : MonoBehaviour
         _switchStageNum = switchStageNum;
         _curStageNum = curStageNum;
         foreach (var trap in _trapDatas) {
+            if (trap.trap == null) print(name);
             trap.trap.InitFromSwitch(_switchStageNum);
         }
     }

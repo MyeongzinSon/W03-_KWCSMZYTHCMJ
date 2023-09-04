@@ -14,6 +14,8 @@ public class RedBean : Deadly
     [SerializeField] private Vector2 relativeTargetPosition;
     //Only For Repeat
     [SerializeField] private float interval;
+    [SerializeField] private float delay;
+    [HideInInspector] public bool isClone = false;
 
     [Header("Rotational")]
     [SerializeField] private float rotationSpeed;
@@ -95,6 +97,7 @@ public class RedBean : Deadly
 
     IEnumerator StartRepeatInstantiate()
     {
+        if(!isClone) yield return new WaitForSeconds(delay);
         Vector2 target = (Vector2)transform.position + relativeTargetPosition;
         bool hasInstantiatedNext = false;
         float instantiateTimer = interval;
@@ -106,7 +109,8 @@ public class RedBean : Deadly
             if (instantiateTimer <= 0 && hasInstantiatedNext == false)
             {
                 hasInstantiatedNext = true;
-                Instantiate(gameObject, startingPosition, Quaternion.identity);
+                GameObject go = Instantiate(gameObject, startingPosition, Quaternion.identity);
+                go.GetComponent<RedBean>().isClone = true;
             }
             if (Vector2.Distance(transform.position, target) <= Mathf.Epsilon)
             {
@@ -120,6 +124,7 @@ public class RedBean : Deadly
         {
             hasInstantiatedNext = true;
             GameObject go = Instantiate(gameObject, startingPosition, Quaternion.identity);
+            go.GetComponent<RedBean>().isClone = true;
             if (go.GetComponent<SpriteRenderer>() != null) go.GetComponent<SpriteRenderer>().enabled = true;
             if (go.GetComponent<Collider2D>() != null) go.GetComponent<Collider2D>().enabled = true;
         }

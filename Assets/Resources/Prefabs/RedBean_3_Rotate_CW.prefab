@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3690520286097968715}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7095451825909419600}
@@ -143,6 +143,8 @@ MonoBehaviour:
   linearSpeed: 0
   relativeTargetPosition: {x: 0, y: 0}
   interval: 0
+  delay: 0
+  isClone: 0
   rotationSpeed: -90
   radius: 2
   angularSpeed: 180
@@ -161,7 +163,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.11
+  m_Radius: 0.13
 --- !u!1001 &461410552682027868
 PrefabInstance:
   m_ObjectHideFlags: 0

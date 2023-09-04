@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Research.Chan;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,9 +33,8 @@ public class GhostCharacter : CharacterBase, IDecodeListener
 
     protected override bool CheckDeadly(Collider2D collision)
     {
-        if (collision.CompareTag("DeadZone"))
+        if (collision.CompareTag("DeadZone") && collision.GetComponentInChildren<SwitchableTrap>() != null)
         {
-            isDoneMoving = true;
             collidingDeadZones.Add(collision);
             StartCoroutine(CheckDeadlyCoroutine(collision));
             return true;
@@ -46,6 +46,7 @@ public class GhostCharacter : CharacterBase, IDecodeListener
         yield return new WaitForSeconds(delay);
         if (collidingDeadZones.Contains(collision))
         {
+            isDoneMoving = true;
             StartCoroutine(StageFailCoroutine());
             StageFail();
         }
