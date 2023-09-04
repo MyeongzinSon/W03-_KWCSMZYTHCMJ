@@ -53,7 +53,7 @@ public class GhostCharacter : CharacterBase, IDecodeListener
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("DeadZone"))
+        if (collision.CompareTag("DeadZone") && collision.GetComponentInChildren<SwitchableTrap>() != null)
         {
             if (collidingDeadZones.Contains(collision))
             {
