@@ -14,7 +14,9 @@ public abstract class CharacterBase : MonoBehaviour
     protected bool isDoneMoving; //this character has reached its ending point.
     protected int stageNum;
 
-    protected ParticleSystem _particleSystem;
+    protected ParticleSystem _deadParticleSystem;
+    protected ParticleSystem _winParticleSystem;
+
     protected SpriteRenderer _spriteRenderer;
     
     private bool _isAtEndingPoint = false;
@@ -22,7 +24,9 @@ public abstract class CharacterBase : MonoBehaviour
     protected virtual void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        _particleSystem = GetComponentInChildren<ParticleSystem>();
+        //_deadParticleSystem = GetComponentInChildren<ParticleSystem>();
+        _deadParticleSystem = transform.Find("Dead Particle System").GetComponent<ParticleSystem>();
+        _winParticleSystem = transform.Find("Win Particle System").GetComponent<ParticleSystem>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         GameManager.Instance.clearedCount = 0;
@@ -36,14 +40,16 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        CheckDeadly(other);
+        if (CheckDeadly(other)) {
+            return;
+        }
         if (other.tag == "EndingPoint" && !_isAtEndingPoint)
         {
             Debug.Log("end");
             isDoneMoving = true;
             _isAtEndingPoint = true;
             Debug.Log("end " + this);
-            GameManager.Instance.OneOfStagesCleared();
+            StartCoroutine(StageClearCoroutine());
         }
     }
 
@@ -59,12 +65,16 @@ public abstract class CharacterBase : MonoBehaviour
         rigidBody.velocity = velocity.normalized * speed;
     }
  
-    protected virtual void CheckDeadly(Collider2D collision)
+    protected virtual bool CheckDeadly(Collider2D collision)
     {
         if (collision.CompareTag("DeadZone"))
         {
+            Debug.Log("dead");
+            isDoneMoving = true;
             StartCoroutine(StageFailCoroutine());
+            return true;
         }
+        return false;
     }
 
     protected void StageFail()
@@ -72,12 +82,19 @@ public abstract class CharacterBase : MonoBehaviour
         GameManager.Instance.StageFail();
     }
 
-    IEnumerator StageFailCoroutine()
+    protected IEnumerator StageFailCoroutine()
     {
-        _particleSystem.Play();
+        _deadParticleSystem.Play();
         _spriteRenderer.enabled = false;
-        isDoneMoving = true;
         yield return new WaitForSeconds(1f);
         StageFail();
+    }
+
+    protected IEnumerator StageClearCoroutine()
+    {
+        _winParticleSystem.Play();
+        _spriteRenderer.enabled = false;
+        yield return new WaitForSeconds(1f);
+        GameManager.Instance.OneOfStagesCleared();
     }
 }

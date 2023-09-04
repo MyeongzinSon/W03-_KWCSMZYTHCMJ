@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     int currentStage = 1;
     public int clearedCount = 0;
+    public int endedCount = 0;
 
     private void Awake()
     {
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            StageFail();
+            ForceReloadScene();
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -158,8 +159,9 @@ public class GameManager : MonoBehaviour
     }
     public void StageFail()
     {
-        currentInputRecorder.EndRecord();
-        ReloadScene();
+        endedCount++;
+        // currentInputRecorder.EndRecord();
+        // ReloadScene();
     }
     public void RestartPreviousStage()
     {
@@ -167,9 +169,18 @@ public class GameManager : MonoBehaviour
         if (currentStage == 0) currentStage = 1;
         ReloadScene();
     }
+
+    void ForceReloadScene() {
+        clearedCount = 0;
+        endedCount = 0;
+        Debug.Log("cc B " + clearedCount);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     void ReloadScene()
     {
         clearedCount = 0;
+        endedCount = 0;
         Debug.Log("cc B " + clearedCount);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -181,8 +192,10 @@ public class GameManager : MonoBehaviour
 
     public void OneOfStagesCleared()
     {
+        endedCount++;
         clearedCount++;
         Debug.Log("cc A " + clearedCount);
+
         if (clearedCount >= currentStage)
         {
             Debug.Log(clearedCount);
