@@ -10027,18 +10027,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 758738652, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054156763091493551, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054156763091493551, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.91
-      objectReference: {fileID: 0}
     - target: {fileID: 1054156763614793168, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
       propertyPath: m_Name
       value: Game Manager
@@ -10086,30 +10074,6 @@ PrefabInstance:
     - target: {fileID: 1054156763614793170, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054156764113582109, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054156764113582109, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054156764356277359, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054156764356277359, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054156764526055460, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -9.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054156764526055460, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
