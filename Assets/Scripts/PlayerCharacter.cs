@@ -56,6 +56,10 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
         }
     }
 
+    public void CannotMove() {
+        isDoneMoving = true;
+    }
+
     void Interact()
     {
         if (_isCollidingWithSwitch) {
