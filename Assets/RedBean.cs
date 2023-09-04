@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine.InputSystem.Utilities;
 
 public class RedBean : Deadly
@@ -150,56 +150,56 @@ public class RedBean : Deadly
         }
     }
 
-#if UNITY_EDITOR
-    [CustomEditor(typeof(RedBean)), CanEditMultipleObjects]
-    public class RedBeanEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
+//#if UNITY_EDITOR
+//    [CustomEditor(typeof(RedBean)), CanEditMultipleObjects]
+//    public class RedBeanEditor : Editor
+//    {
+//        public override void OnInspectorGUI()
+//        {
+//            base.OnInspectorGUI();
 
-            RedBean redBean = (RedBean)target;
+//            RedBean redBean = (RedBean)target;
 
-            switch (redBean.type)
-            {
-                case RedBeanType.None:
-                    break;
-                case RedBeanType.Linear:
-                    DrawLinearTypeEditor(redBean);
-                    break;
-                case RedBeanType.Rotation:
-                    DrawRotationTypeEditor(redBean);
-                    break;
-                case RedBeanType.Circular:
-                    DrawCircularTypeEditor(redBean);
-                    break;
-                default:
-                    break;
-            }
-        }
+//            switch (redBean.type)
+//            {
+//                case RedBeanType.None:
+//                    break;
+//                case RedBeanType.Linear:
+//                    DrawLinearTypeEditor(redBean);
+//                    break;
+//                case RedBeanType.Rotation:
+//                    DrawRotationTypeEditor(redBean);
+//                    break;
+//                case RedBeanType.Circular:
+//                    DrawCircularTypeEditor(redBean);
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
 
-        static void DrawLinearTypeEditor(RedBean redBean)
-        {
-            redBean.linearType = (LinearType) EditorGUILayout.EnumPopup("Linear Type",redBean.linearType);
-            redBean.linearSpeed = EditorGUILayout.FloatField("Speed", redBean.linearSpeed);
-            redBean.relativeTargetPosition = EditorGUILayout.Vector2Field("Relative Target Position",redBean.relativeTargetPosition);
-            if (redBean.linearType == LinearType.RepeatInstantiate)
-                redBean.interval = EditorGUILayout.FloatField("Interval", redBean.interval);
-        }
+//        static void DrawLinearTypeEditor(RedBean redBean)
+//        {
+//            redBean.linearType = (LinearType) EditorGUILayout.EnumPopup("Linear Type",redBean.linearType);
+//            redBean.linearSpeed = EditorGUILayout.FloatField("Speed", redBean.linearSpeed);
+//            redBean.relativeTargetPosition = EditorGUILayout.Vector2Field("Relative Target Position",redBean.relativeTargetPosition);
+//            if (redBean.linearType == LinearType.RepeatInstantiate)
+//                redBean.interval = EditorGUILayout.FloatField("Interval", redBean.interval);
+//        }
 
-        static void DrawRotationTypeEditor(RedBean redBean)
-        {
-            redBean.rotationSpeed = EditorGUILayout.FloatField("Rotation Speed", redBean.rotationSpeed);
-        }
+//        static void DrawRotationTypeEditor(RedBean redBean)
+//        {
+//            redBean.rotationSpeed = EditorGUILayout.FloatField("Rotation Speed", redBean.rotationSpeed);
+//        }
 
-        static void DrawCircularTypeEditor(RedBean redBean)
-        {
-            redBean.radius = EditorGUILayout.FloatField("Radius", redBean.radius);
-            redBean.angularSpeed = EditorGUILayout.FloatField("Angular Speed", redBean.angularSpeed);
+//        static void DrawCircularTypeEditor(RedBean redBean)
+//        {
+//            redBean.radius = EditorGUILayout.FloatField("Radius", redBean.radius);
+//            redBean.angularSpeed = EditorGUILayout.FloatField("Angular Speed", redBean.angularSpeed);
 
-        }
-    }
-#endif
+//        }
+//    }
+//#endif
 }
 
 public enum RedBeanType { None, Linear, Rotation, Circular}
