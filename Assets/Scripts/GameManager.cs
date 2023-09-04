@@ -20,18 +20,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] StageResultIndicator[] stageResultIndicators;
     [SerializeField] SpriteRenderer[] stageBlinds;
     [SerializeField] bool isDebugMode = false;
+    [SerializeField] float[] timeLimits;
+    [SerializeField] GameObject timeLimitBar;
+    [SerializeField] GameObject[] timeoutPanels;
 
     List<GameObject> playerAndGhosts = new();
     InputRecorder currentInputRecorder;
     Queue<InputInfo>[] inputQueues = new Queue<InputInfo>[k_maxStage - 1];
     List<Switch> switchs;
     List<SwitchableTrap> traps;
+    Vector3 originalTimeLimitBarSize = new Vector3(21.35f, 0.45f, 1f);
 
 
     int currentStage = 1;
     public int clearedCount = 0;
     public int endedCount = 0;
     private bool isWaitForReloadScene = false;
+    private PlayerCharacter currentPlayer;
 
     private void Awake()
     {
@@ -141,6 +146,7 @@ public class GameManager : MonoBehaviour
                 currentInputRecorder.StartRecord();
                 var player = playerGameObject.GetComponent<CharacterBase>();
                 player.SetStageNum(i);
+                currentPlayer = player as PlayerCharacter;
             }
             else
             {
@@ -171,6 +177,7 @@ public class GameManager : MonoBehaviour
         }
         
         isWaitForReloadScene = false;
+        StartCoroutine(TimeLimiter());
     }
 
     public void LevelClear()
@@ -203,6 +210,17 @@ public class GameManager : MonoBehaviour
             isWaitForReloadScene = false;
             ReloadScene();
         }
+    }
+
+    IEnumerator TimeLimiter() {
+        foreach (var panel in timeoutPanels) panel.SetActive(false);
+        timeLimitBar.transform.localScale = originalTimeLimitBarSize;
+        timeLimitBar.transform.DOScaleX(0f, timeLimits[currentStage - 1]).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(timeLimits[currentStage - 1]);
+        clearedCount = 0;
+        endedCount = 0;
+        timeoutPanels[currentStage - 1].SetActive(true);
+        currentPlayer.CannotMove();
     }
 
     void WaitForReloadScene() {
