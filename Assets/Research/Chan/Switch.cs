@@ -26,29 +26,11 @@ public class Switch : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
-            foreach (var trapData in _trapDatas) {
-                if (trapData.shouldTurnOn) {
-                    if (trapData.trap.IsToggledOn) {
-                        trapData.trap.PlayerToggleOffTrap();
-                    }
-                } else {
-                    //trap.trap.PlayerToggleOnTrap();
-                }
-            }
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
-            foreach (var trap in _trapDatas) {
-                if (trap.shouldTurnOn) {
-                    //trap.trap.PlayerToggleOnTrap();
-                } else {
-                    if (trap.trap.IsToggledOn) {
-                        trap.trap.PlayerToggleOffTrap();
-                    }
+    public void OnSwitchInteract() {
+        foreach (var trapData in _trapDatas) {
+            if (trapData.shouldTurnOn) {
+                if (trapData.trap.IsToggledOn) {
+                    trapData.trap.PlayerToggleOffTrap();
                 }
             }
         }

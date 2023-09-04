@@ -57,6 +57,9 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
 
     void Interact()
     {
+        if (_isCollidingWithSwitch) {
+            _collidingSwitch.OnSwitchInteract();
+        }
         Debug.Log($"Interaction has been called!");
     }
 }

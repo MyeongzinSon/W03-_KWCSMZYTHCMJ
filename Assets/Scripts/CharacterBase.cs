@@ -18,6 +18,9 @@ public abstract class CharacterBase : MonoBehaviour
     protected ParticleSystem _winParticleSystem;
 
     protected SpriteRenderer _spriteRenderer;
+
+    protected bool _isCollidingWithSwitch = false;
+    protected Switch _collidingSwitch = null;
     
     private bool _isAtEndingPoint = false;
 
@@ -40,9 +43,6 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if (CheckDeadly(other)) {
-            return;
-        }
         if (other.tag == "EndingPoint" && !_isAtEndingPoint)
         {
             Debug.Log("end");
@@ -50,6 +50,25 @@ public abstract class CharacterBase : MonoBehaviour
             _isAtEndingPoint = true;
             Debug.Log("end " + this);
             StartCoroutine(StageClearCoroutine());
+        }
+
+        if (other.GetComponentInChildren<Switch>() != null) {
+            _collidingSwitch = other.GetComponentInChildren<Switch>();
+            _isCollidingWithSwitch = true; 
+        }
+
+        if (CheckDeadly(other)) {
+            return;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other) {
+        if (other.GetComponentInChildren<Switch>() != null) {
+            Switch s = other.GetComponentInChildren<Switch>();
+            if (s == _collidingSwitch) {
+                _collidingSwitch = null;
+                _isCollidingWithSwitch = false;
+            }
         }
     }
 
@@ -92,9 +111,17 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected IEnumerator StageClearCoroutine()
     {
-        _winParticleSystem.Play();
+        StartCoroutine(StageClearParticleCoroutine());
         _spriteRenderer.enabled = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         GameManager.Instance.OneOfStagesCleared();
+    }
+
+    protected IEnumerator StageClearParticleCoroutine()
+    {
+        while (true) {
+            _winParticleSystem.Play();
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }
