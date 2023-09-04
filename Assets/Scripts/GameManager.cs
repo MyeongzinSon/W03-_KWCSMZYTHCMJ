@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
         }
         
         playerAndGhosts.Clear();
+        stageResultIndicators.ToList().ForEach(i => i.ClearResult());
 
         int i = 1;
         for (; i <= currentStage; i++)

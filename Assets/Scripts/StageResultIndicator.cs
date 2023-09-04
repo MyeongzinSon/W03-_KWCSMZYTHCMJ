@@ -24,4 +24,9 @@ public class StageResultIndicator : MonoBehaviour
         spriteRenderer.color = startColor;
         spriteRenderer.DOColor(endColor, tweeningDuration);
     }
+    public void ClearResult()
+    {
+        DOTween.Kill(spriteRenderer);
+        spriteRenderer.color = defaultColor;
+    }
 }
