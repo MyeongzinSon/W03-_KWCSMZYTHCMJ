@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7095451825909419615}
   m_Layer: 0
   m_Name: RedBean_3_Rotate_CW
-  m_TagString: Untagged
+  m_TagString: DeadZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
