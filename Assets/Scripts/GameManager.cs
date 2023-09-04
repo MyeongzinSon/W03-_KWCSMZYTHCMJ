@@ -42,14 +42,6 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            RestartPreviousStage();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StageFail();
-        }
         if (Input.GetKeyDown(KeyCode.T))
         {
             LevelClear();

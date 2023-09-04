@@ -31,4 +31,14 @@ public class TitleManager : MonoBehaviour, PlayerInputActions.IPlayerActions
     {
 
     }
+
+    void PlayerInputActions.IPlayerActions.OnRestart(InputAction.CallbackContext context)
+    {
+
+    }
+
+    void PlayerInputActions.IPlayerActions.OnPrevious(InputAction.CallbackContext context)
+    {
+
+    }
 }
