@@ -101,11 +101,11 @@ public abstract class CharacterBase : MonoBehaviour
     protected void StageFail()
     {
         GameManager.Instance.StageFail();
-        GameManager.Instance.IndicateStageResult(stageNum, false);
     }
 
     protected IEnumerator StageFailCoroutine()
     {
+        GameManager.Instance.IndicateStageResult(stageNum, false);
         _deadParticleSystem.Play();
         _spriteRenderer.enabled = false;
         _collider.enabled = false;
@@ -115,12 +115,12 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected IEnumerator StageClearCoroutine()
     {
+        GameManager.Instance.IndicateStageResult(stageNum, true);
         StartCoroutine(StageClearParticleCoroutine());
         _spriteRenderer.enabled = false;
         _collider.enabled = false;
         yield return new WaitForSeconds(3f);
         GameManager.Instance.OneOfStagesCleared();
-        GameManager.Instance.IndicateStageResult(stageNum, true);
     }
 
     protected IEnumerator StageClearParticleCoroutine()
