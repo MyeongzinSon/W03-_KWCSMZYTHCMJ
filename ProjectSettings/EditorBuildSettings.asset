@@ -9,15 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: 804f84993903e3f46b3ee30fab84d0fa
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 1e96e7e38ab382f439abbbf7ee018812
+  - enabled: 1
     path: Assets/Scenes/Level.unity
     guid: 20f2aae841020514783a3fe2062f7c7f
   - enabled: 1
     path: Assets/Scenes/Ending.unity
     guid: 89f7cdae853616a4b977fe88b1650bcf
-  - enabled: 1
-    path: Assets/Scenes/PlayerTestKWC.unity
-    guid: 6240ed1c2700c9140a4e2b51ef98b995
-  - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
-    guid: 1e96e7e38ab382f439abbbf7ee018812
   m_configObjects: {}
