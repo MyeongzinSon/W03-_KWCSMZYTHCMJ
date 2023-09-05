@@ -19,7 +19,7 @@ public class GhostCharacter : CharacterBase, IDecodeListener
 
     void Interact()
     {
-        if (_isCollidingWithSwitch) {
+        if (_isCollidingWithSwitch && !isDoneMoving) {
             _collidingSwitch.OnSwitchInteract();
         }
         Debug.Log($"Interaction has been called!");
@@ -48,7 +48,6 @@ public class GhostCharacter : CharacterBase, IDecodeListener
         {
             isDoneMoving = true;
             StartCoroutine(StageFailCoroutine());
-            StageFail();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

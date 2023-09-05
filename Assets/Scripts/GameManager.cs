@@ -56,14 +56,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ForceReloadScene();
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            RestartPreviousStage();
-        }
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -201,9 +193,15 @@ public class GameManager : MonoBehaviour
     public void StageFail()
     {
         endedCount++;
-        // currentInputRecorder.EndRecord();
-        // ReloadScene();
+        currentInputRecorder.EndRecord();
     }
+
+    public void StopTimeLimiter()
+    {
+        StopCoroutine(timeLimiterCoroutine);
+        timeLimitBarTween.Kill();
+    }
+
     public void RestartPreviousStage()
     {
         currentStage--;
@@ -233,7 +231,7 @@ public class GameManager : MonoBehaviour
         isWaitForReloadScene = true;
     }
 
-    void ForceReloadScene() {
+    public void ForceReloadScene() {
         clearedCount = 0;
         endedCount = 0;
         Debug.Log("cc B " + clearedCount);

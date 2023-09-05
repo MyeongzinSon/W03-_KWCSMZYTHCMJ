@@ -7,16 +7,21 @@ using UnityEngine.InputSystem;
 public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
 {
     InputRecorder recorder;
+    PlayerInputActions inputs;
 
     protected override void Awake()
     {
         base.Awake();
 
-        PlayerInputActions inputs = new();
+        inputs = new();
         inputs.Player.SetCallbacks(this);
         inputs.Enable();
 
         recorder = GetComponent<InputRecorder>();
+    }
+    void OnDisable()
+    {
+        inputs.Disable();
     }
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -44,16 +49,26 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
     {
         if (context.performed)
         {
-            //GameManager.Instance.StageFail();
+            GameManager.Instance.ForceReloadScene();
         }
     }
     public void OnPrevious(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            //GameManager.Instance.RestartPreviousStage();
-            
+            GameManager.Instance.RestartPreviousStage();
         }
+    }
+
+    protected override void StageFail() {
+        base.StageFail();
+        GameManager.Instance.StopTimeLimiter();
+    }
+
+    protected override void StageClear()
+    {
+        base.StageClear();
+        GameManager.Instance.StopTimeLimiter();
     }
 
     public void CannotMove() {
@@ -62,7 +77,7 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
 
     void Interact()
     {
-        if (_isCollidingWithSwitch) {
+        if (_isCollidingWithSwitch && !isDoneMoving) {
             _collidingSwitch.OnSwitchInteract();
         }
         Debug.Log($"Interaction has been called!");
