@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float[] timeLimits;
     [SerializeField] GameObject timeLimitBar;
     [SerializeField] GameObject[] timeoutPanels;
+    [SerializeField] GameObject levelClearUI;
 
     List<GameObject> playerAndGhosts = new();
     InputRecorder currentInputRecorder;
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     public int clearedCount = 0;
     public int endedCount = 0;
     private bool isWaitForReloadScene = false;
+    private bool canMoveNextScene = false;
     private PlayerCharacter currentPlayer;
     private IEnumerator timeLimiterCoroutine;
 
@@ -109,6 +111,7 @@ public class GameManager : MonoBehaviour
 
     public void StartStage()
     {
+        levelClearUI.SetActive(false);
         switchs = new List<Switch>();
         for (int si = 0; si < k_maxStage; si++) {
             var l = GameObject.Find("Stage " + (si + 1));
@@ -214,6 +217,10 @@ public class GameManager : MonoBehaviour
             isWaitForReloadScene = false;
             ReloadScene();
         }
+        if (canMoveNextScene)
+        {
+            GoToNextScene();
+        }
     }
 
     IEnumerator TimeLimiter() {
@@ -260,7 +267,7 @@ public class GameManager : MonoBehaviour
         if (clearedCount >= currentStage)
         {
             Debug.Log(clearedCount);
-            if (currentStage == k_maxStage) Debug.Log("Level Cleared!");
+            if (currentStage == k_maxStage) StartCoroutine(ShowClearUICoroutine());
             else LevelClear();
         }
     }
@@ -268,5 +275,17 @@ public class GameManager : MonoBehaviour
     public void IndicateStageResult(int stageNum, bool isCleared)
     {
         stageResultIndicators[stageNum - 1].ShowResult(isCleared);
+    }
+
+    IEnumerator ShowClearUICoroutine()
+    {
+        levelClearUI.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        canMoveNextScene = true;
+    }
+    void GoToNextScene()
+    {
+        Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
