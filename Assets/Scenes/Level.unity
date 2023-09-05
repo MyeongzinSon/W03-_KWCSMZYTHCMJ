@@ -9209,7 +9209,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1054156763614793171, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
       propertyPath: timeLimits.Array.data[3]
+<<<<<<< HEAD
       value: 75
+=======
+      value: 72
+>>>>>>> main
       objectReference: {fileID: 0}
     - target: {fileID: 5357479865612975273, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
       propertyPath: m_IsActive
