@@ -285,6 +285,7 @@ public class GameManager : MonoBehaviour
     }
     void GoToNextScene()
     {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
         Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
