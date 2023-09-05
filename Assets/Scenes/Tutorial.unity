@@ -514,7 +514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 856723392, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1054156763091493551, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -571,6 +571,18 @@ PrefabInstance:
     - target: {fileID: 1054156763614793170, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054156763614793171, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
+      propertyPath: timeLimits.Array.data[1]
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054156763614793171, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
+      propertyPath: timeLimits.Array.data[2]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054156763614793171, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
+      propertyPath: timeLimits.Array.data[3]
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1054156764113582109, guid: e1e705746fc474c44b28e756985e1ad8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1954,7 +1966,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.44, g: 0.44, b: 0.44, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2170,6 +2182,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
+      propertyPath: linearType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
       propertyPath: relativeTargetPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -2256,11 +2272,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3835985924531472505, guid: 348941fad20f16e439494328f0ef29cf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.03
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3835985924531472505, guid: 348941fad20f16e439494328f0ef29cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4152479248556487640, guid: 348941fad20f16e439494328f0ef29cf, type: 3}
       propertyPath: m_Name
@@ -2320,11 +2336,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4152479248556487645, guid: 348941fad20f16e439494328f0ef29cf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.82
+      value: 1.72
       objectReference: {fileID: 0}
     - target: {fileID: 4152479248556487645, guid: 348941fad20f16e439494328f0ef29cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.85
+      value: -4.28
       objectReference: {fileID: 0}
     - target: {fileID: 4152479248556487645, guid: 348941fad20f16e439494328f0ef29cf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3344,6 +3360,10 @@ PrefabInstance:
     - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
       propertyPath: interval
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
+      propertyPath: linearType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5112815938388276965, guid: aa18963b2a421ec479f60c78207c14b5, type: 3}
       propertyPath: relativeTargetPosition.x
