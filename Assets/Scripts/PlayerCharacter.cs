@@ -7,16 +7,21 @@ using UnityEngine.InputSystem;
 public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
 {
     InputRecorder recorder;
+    PlayerInputActions inputs;
 
     protected override void Awake()
     {
         base.Awake();
 
-        PlayerInputActions inputs = new();
+        inputs = new();
         inputs.Player.SetCallbacks(this);
         inputs.Enable();
 
         recorder = GetComponent<InputRecorder>();
+    }
+    void OnDisable()
+    {
+        inputs.Disable();
     }
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -44,15 +49,14 @@ public class PlayerCharacter : CharacterBase, PlayerInputActions.IPlayerActions
     {
         if (context.performed)
         {
-            //GameManager.Instance.StageFail();
+            GameManager.Instance.ForceReloadScene();
         }
     }
     public void OnPrevious(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            //GameManager.Instance.RestartPreviousStage();
-            
+            GameManager.Instance.RestartPreviousStage();
         }
     }
 
