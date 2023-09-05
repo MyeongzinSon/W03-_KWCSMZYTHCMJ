@@ -19,7 +19,7 @@ public class GhostCharacter : CharacterBase, IDecodeListener
 
     void Interact()
     {
-        if (_isCollidingWithSwitch) {
+        if (_isCollidingWithSwitch && !isDoneMoving) {
             _collidingSwitch.OnSwitchInteract();
         }
         Debug.Log($"Interaction has been called!");
